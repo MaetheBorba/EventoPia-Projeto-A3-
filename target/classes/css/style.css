@@ -1,0 +1,37 @@
+* {
+    -fx-font-family: "System", "sans-serif";
+    -fx-focus-traversable: false;
+}
+
+#loginPage {
+    -fx-alignment: center;
+}
+#h2 {
+    -fx-alignment: center;
+    -fx-text-fill: rgba(0, 0, 0, .7);
+    -fx-font-size: 2em;
+    -fx-font-weight: bold;
+}
+
+#inputBox {
+    -fx-font-family: "Consolas", "sans-serif";
+    -fx-focus-traversable: false;
+}
+
+.check-box, .label {
+    -fx-font-size: 1em;
+}
+
+#btn {
+    -fx-font-weight: bold;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-cursor: HAND;
+}
+
+#btn-home {
+    -fx-background-radius: 15px;
+    -fx-cursor: HAND;
+}
