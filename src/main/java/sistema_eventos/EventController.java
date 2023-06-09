@@ -3,10 +3,7 @@ package sistema_eventos;
 import java.io.*;
 import java.util.*;
 import javafx.fxml.*;
-import javafx.scene.*;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
-import javafx.event.ActionEvent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -54,7 +51,7 @@ public class EventController extends App {
         }
     }
 
-    public void cadastrarEvento(ActionEvent event) throws IOException {
+    public void cadastrarEvento() throws IOException {
         String nome = campoNome.getText();
         String endereco = campoEndereco.getText();
         String categoria = campoCategoria.getText();

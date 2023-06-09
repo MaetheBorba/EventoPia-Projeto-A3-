@@ -2,8 +2,6 @@ package sistema_eventos;
 
 import java.io.*;
 import java.util.*;
-
-import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 
@@ -52,7 +50,7 @@ public class AccountController {
         }
     }
 
-    public void cadastrarUsuario(ActionEvent event) throws IOException {
+    public void cadastrarUsuario() throws IOException {
         String nome = campoNome.getText();
         String idade = campoIdade.getText();
         String email = campoEmail.getText();
