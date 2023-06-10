@@ -16,6 +16,11 @@ public class HomeController {
         App.setRoot("event-register");
     }
 
+    @FXML
+    private void switchToEventList() throws IOException {
+        App.setRoot("event-list");
+    }
+
 }
 
 

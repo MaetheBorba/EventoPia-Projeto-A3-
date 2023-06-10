@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistema_eventos.EventController">
+   <children>
+      <Button id="btn-home" fx:id="btnHome" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToHome" prefHeight="30.0" prefWidth="30.0" />
+      <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" layoutX="19.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/home.png" />
+         </image>
+      </ImageView>
+      <ListView fx:id="eventList" layoutX="211.0" layoutY="25.0" prefHeight="200.0" prefWidth="200.0" />
+      <Button layoutX="108.0" layoutY="350.0" mnemonicParsing="false" text="Cancelar" />
+      <Button layoutX="39.0" layoutY="350.0" mnemonicParsing="false" text="Confirmar" />
+      <Label fx:id="participacaoEvento" layoutX="6.0" layoutY="299.0" prefHeight="51.0" prefWidth="204.0" text="Sua participação não está confirmada" />
+      <Label fx:id="dataNome" layoutX="94.0" layoutY="31.0" />
+      <Label layoutX="18.0" layoutY="77.0" text="Endereço:" />
+      <Label layoutX="17.0" layoutY="119.0" text="Categoria:" />
+      <Label layoutX="18.0" layoutY="161.0" text="Horário:" />
+      <Label layoutX="17.0" layoutY="203.0" text="Descrição:" />
+      <TextField fx:id="dataEndereco" editable="false" layoutX="14.0" layoutY="94.0" />
+      <TextField fx:id="dataCategoria" editable="false" layoutX="14.0" layoutY="136.0" />
+      <TextField fx:id="dataHorario" editable="false" layoutX="14.0" layoutY="178.0" />
+      <TextField fx:id="dataDescricao" editable="false" layoutX="14.0" layoutY="220.0" prefHeight="87.0" prefWidth="149.0" />
+   </children>
+</AnchorPane>

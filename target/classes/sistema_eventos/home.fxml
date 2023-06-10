@@ -15,7 +15,9 @@
       </ImageView>
       <AnchorPane layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button layoutX="49.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToEventRegister" text="Registrar evento" />
+            <Button layoutX="45.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToEventRegister" prefWidth="110.0" text="Registrar evento" />
+            <Button layoutX="45.0" layoutY="88.0" mnemonicParsing="false" onAction="#switchToEventList" text="Eventos próximos" />
+            <Button layoutX="45.0" layoutY="161.0" mnemonicParsing="false" onAction="#switchToEventList" prefWidth="110.0" text="Eventos Passados" />
          </children>
       </AnchorPane>
    </children>

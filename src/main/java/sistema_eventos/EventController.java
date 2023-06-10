@@ -1,13 +1,18 @@
 package sistema_eventos;
 
 import java.io.*;
+import java.net.URL;
 import java.util.*;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.*;
 import javafx.scene.control.*;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class EventController extends App {
+public class EventController implements Initializable {
 
     private static List<Evento> eventos = new ArrayList<>();
     private static Evento evento;
@@ -22,6 +27,19 @@ public class EventController extends App {
     private TextField campoHorario;
     @FXML
     private TextField campoDescricao;
+
+    @FXML
+    private ListView<String> eventList;
+    @FXML
+    private TextField dataCategoria;
+    @FXML
+    private TextField dataDescricao;
+    @FXML
+    private TextField dataEndereco;
+    @FXML
+    private TextField dataHorario;
+    @FXML
+    private Label dataNome;
 
     
     @FXML
@@ -80,6 +98,28 @@ public class EventController extends App {
 
         switchToHome();
 
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        for (Evento evento : eventos) {
+            eventList.getItems().add(evento.getNome());
+        }
+
+        eventList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
+                for (Evento evento : eventos) {
+                    if (evento.getNome() == eventList.getSelectionModel().getSelectedItem()) {
+                        dataNome.setText(evento.getNome());
+                        dataEndereco.setText(evento.getEndereco());
+                        dataCategoria.setText(evento.getCategoria());
+                        dataHorario.setText(evento.getHorario().toString());
+                        dataDescricao.setText(evento.getDescricao());
+                    }
+                }
+            }
+        });
     }
 
 }
