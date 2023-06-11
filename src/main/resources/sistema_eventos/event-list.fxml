@@ -17,8 +17,8 @@
          </image>
       </ImageView>
       <ListView fx:id="eventList" layoutX="211.0" layoutY="25.0" prefHeight="200.0" prefWidth="200.0" />
-      <Button layoutX="108.0" layoutY="350.0" mnemonicParsing="false" text="Cancelar" />
-      <Button layoutX="39.0" layoutY="350.0" mnemonicParsing="false" text="Confirmar" />
+      <Button layoutX="108.0" layoutY="350.0" mnemonicParsing="false" onAction="#removeParticipante" text="Cancelar" />
+      <Button layoutX="39.0" layoutY="350.0" mnemonicParsing="false" onAction="#addParticipante" text="Confirmar" />
       <Label fx:id="participacaoEvento" layoutX="6.0" layoutY="299.0" prefHeight="51.0" prefWidth="204.0" text="Sua participação não está confirmada" />
       <Label fx:id="dataNome" layoutX="94.0" layoutY="31.0" />
       <Label layoutX="18.0" layoutY="77.0" text="Endereço:" />

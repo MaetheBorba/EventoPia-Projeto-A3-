@@ -1,0 +1,74 @@
+package sistema_eventos;
+
+import java.io.*;
+import java.util.*;
+
+import javafx.fxml.*;
+import javafx.scene.control.*;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class EventRegisterController {
+
+    private static List<Evento> eventos = new ArrayList<>();
+    private static Evento evento;
+
+    @FXML
+    private TextField campoNome;
+    @FXML
+    private TextField campoEndereco;
+    @FXML
+    private TextField campoCategoria;
+    @FXML
+    private TextField campoHorario;
+    @FXML
+    private TextField campoDescricao;
+
+    
+    @FXML
+    private void switchToHome() throws IOException {
+        App.setRoot("home");
+    }
+
+    
+
+    public void cadastrarEvento() throws IOException {
+        eventos = Evento.carregarEventos();
+        String nome = campoNome.getText();
+        String endereco = campoEndereco.getText();
+        String categoria = campoCategoria.getText();
+        String horarioStr = campoHorario.getText();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime horario = LocalDateTime.parse(horarioStr, formatter);
+        String descricao = campoDescricao.getText();
+
+        evento = new Evento(nome, endereco, categoria, horario, descricao);
+        eventos.add(evento);
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/data/eventos/" + nome + ".data"))) {
+            System.out.println("Evento salvo com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar evento: " + e.getMessage());
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/data/events.data"))) {
+            for (Evento evento : eventos) {
+                String line = evento.getNome() + "," +
+                        evento.getEndereco() + "," +
+                        evento.getCategoria() + "," +
+                        evento.getHorario().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + "," +
+                        evento.getDescricao();
+                writer.write(line);
+                writer.newLine();
+            }
+            System.out.println("Eventos salvos com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar eventos: " + e.getMessage());
+        }
+
+        switchToHome();
+
+    }
+}
+

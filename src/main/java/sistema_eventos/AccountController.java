@@ -18,6 +18,9 @@ public class AccountController {
     private TextField campoEmail;
     @FXML
     private PasswordField campoSenha;
+    
+    @FXML
+    private Label avisoSenha;
 
     
     @FXML
@@ -51,6 +54,7 @@ public class AccountController {
     }
 
     public void cadastrarUsuario() throws IOException {
+        carregarContas();
         String nome = campoNome.getText();
         String idade = campoIdade.getText();
         String email = campoEmail.getText();
@@ -75,6 +79,28 @@ public class AccountController {
 
         switchToHome();
 
+    }
+
+    public void loginUsuario() throws IOException {
+        carregarContas();
+        String usuarioAtual="";
+        avisoSenha.setText("");
+        String nome = campoNome.getText();
+        String senha = campoSenha.getText();
+
+        for (Usuario usuario : usuarios) {
+            if (usuario.getNome().equals(nome)) {
+                if (usuario.getSenha().equals(senha)) {
+                    usuarioAtual = nome;
+                    Sessao.atualizarSessao(usuarioAtual);
+                    switchToHome();
+                }
+                else {
+                    avisoSenha.setText("Senha incorreta");
+                }
+                break;
+            }
+        }
     }
 
 }

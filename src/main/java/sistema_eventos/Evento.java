@@ -1,6 +1,14 @@
 package sistema_eventos;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Evento {
     private String nome;
@@ -57,16 +65,97 @@ public class Evento {
         this.descricao = descricao;
     }
 
-    public boolean isParticipante(Usuario usuario) {
-        // Lógica para verificar se o usuário é participante do evento
-        return false;
+    public static List<Evento> carregarEventos() {
+        List<Evento> eventos = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/data/events.data"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length == 5) {
+                    String nome = data[0];
+                    String endereco = data[1];
+                    String categoria = data[2];
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                    LocalDateTime horario = LocalDateTime.parse(data[3], formatter);
+                    String descricao = data[4];
+
+                    Evento evento = new Evento(nome, endereco, categoria, horario, descricao);
+                    eventos.add(evento);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar eventos: " + e.getMessage());
+        }
+        return eventos;
     }
 
-    public void removeParticipante(Usuario usuario) {
-        // Lógica para remover o usuário da lista de participantes do evento
+    public boolean isParticipante(String usuario, String nomeEvento) {
+        List<String> participantes = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/data/eventos/" + nomeEvento + ".data"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                participantes.add(line);
+            }
+        } catch (IOException e) {
+                    System.out.println("Erro ao carregar evento: " + e.getMessage());
+            }
+        if (participantes.contains(usuario)) {
+            return true;
+        }
+        else {
+            return false;
+        } 
     }
 
-    public void addParticipante(Usuario usuario) {
-        // Lógica para adicionar o usuário à lista de participantes do evento
+    public void removeParticipante(String usuario, String nomeEvento) {
+        List<String> participantes = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/data/eventos/" + nomeEvento + ".data"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                participantes.add(line);
+            }
+        } catch (IOException e) {
+                    System.out.println("Erro ao carregar evento: " + e.getMessage());
+            }
+
+        if (participantes.contains(usuario)) {
+            participantes.remove(usuario);
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/data/eventos/" + nomeEvento + ".data"))) {
+            for (String participante : participantes) {
+                String line = participante;
+                writer.write(line);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+                System.out.println("Erro ao salvar evento: " + e.getMessage());
+            }
+    }
+
+    public void addParticipante(String usuario, String nomeEvento) {
+        List<String> participantes = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/data/eventos/" + nomeEvento + ".data"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                participantes.add(line);
+            }
+        } catch (IOException e) {
+                    System.out.println("Erro ao carregar evento: " + e.getMessage());
+            }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/data/eventos/" + nomeEvento + ".data"))) {
+            for (String participante : participantes) {
+                String line = participante;
+                writer.write(line);
+                writer.newLine();
+            }
+            if (!(participantes.contains(usuario))) {
+                writer.write(usuario);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+                System.out.println("Erro ao salvar evento: " + e.getMessage());
+            }
     }
 }

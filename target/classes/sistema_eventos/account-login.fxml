@@ -13,25 +13,23 @@
 <AnchorPane id="loginPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistema_eventos.AccountController">
    <children>
       <Button id="btn-home" layoutX="14.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToHome" prefHeight="30.0" prefWidth="30.0" />
-      <Label id="h2" layoutX="257.0" layoutY="68.0" text="Login" />
-      <CheckBox id="text" layoutX="168.0" layoutY="248.0" mnemonicParsing="false" text="Lembre minha conta" />
-      <Button id="btn" layoutX="300.0" layoutY="244.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="136.0" text="Esqueceu sua  senha?" />
-      <Label id="text" layoutX="168.0" layoutY="273.0" text="Não está registrado(a)?" />
-      <Button id="btn" layoutX="300.0" layoutY="269.0" mnemonicParsing="false" onAction="#switchToAccountRegister" prefHeight="25.0" prefWidth="101.0" text="Crie uma conta" />
-      <Pane layoutX="186.0" layoutY="103.0" prefHeight="78.0" prefWidth="200.0">
+      <Label id="h2" layoutX="268.0" layoutY="69.0" text="Login" />
+      <Label id="text" layoutX="186.0" layoutY="274.0" text="Não está registrado(a)?" />
+      <Button id="btn" layoutX="309.0" layoutY="270.0" mnemonicParsing="false" onAction="#switchToAccountRegister" prefHeight="25.0" prefWidth="101.0" text="Crie uma conta" />
+      <Pane layoutX="200.0" layoutY="123.0" prefHeight="40.0" prefWidth="200.0">
          <children>
-            <TextField id="inputBox" layoutX="22.0" layoutY="25.0" prefWidth="173.0" promptText="Nome de usuário" />
-            <ImageView id="icon" fitHeight="20.0" fitWidth="20.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+            <TextField id="inputBox" fx:id="campoNome" layoutX="27.0" layoutY="9.0" prefHeight="25.0" prefWidth="173.0" promptText="Nome de usuário" />
+            <ImageView id="icon" fitHeight="20.0" fitWidth="20.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/user.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <Pane layoutX="186.0" layoutY="142.0" prefHeight="78.0" prefWidth="200.0">
+      <Pane layoutX="200.0" layoutY="169.0" prefHeight="40.0" prefWidth="200.0">
          <children>
-            <PasswordField id="inputBox" layoutX="22.0" layoutY="25.0" prefHeight="25.0" prefWidth="173.0" promptText="Senha" />
-            <ImageView id="icon" fitHeight="20.0" fitWidth="20.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+            <PasswordField id="inputBox" fx:id="campoSenha" layoutX="27.0" layoutY="8.0" prefHeight="25.0" prefWidth="173.0" promptText="Senha" />
+            <ImageView id="icon" fitHeight="20.0" fitWidth="20.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/lock.png" />
                </image>
@@ -43,6 +41,8 @@
             <Image url="@../images/home.png" />
          </image>
       </ImageView>
-      <Button layoutX="186.0" layoutY="208.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Login" />
+      <Button layoutX="200.0" layoutY="236.0" mnemonicParsing="false" onAction="#loginUsuario" prefHeight="25.0" prefWidth="200.0" text="Login" />
+      <CheckBox id="text" layoutX="200.0" layoutY="209.0" mnemonicParsing="false" text="Lembre minha conta" />
+      <Label fx:id="avisoSenha" layoutX="410.0" layoutY="181.0" textFill="RED" />
    </children>
 </AnchorPane>

@@ -7,6 +7,11 @@ public class HomeController {
 
     
     @FXML
+    public static void switchToHome() throws IOException {
+        App.setRoot("home");
+    }
+
+    @FXML
     private void switchToAccountLogin() throws IOException {
         App.setRoot("account-login");
     }
