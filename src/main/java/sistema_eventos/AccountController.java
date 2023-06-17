@@ -21,6 +21,12 @@ public class AccountController {
     
     @FXML
     private Label avisoSenha;
+    @FXML
+    private Label avisoUsuario;
+    @FXML
+    private Label avisoIdade;
+    @FXML
+    private Label avisoEmail;
 
     
     @FXML
@@ -54,31 +60,46 @@ public class AccountController {
     }
 
     public void cadastrarUsuario() throws IOException {
-        carregarContas();
-        String nome = campoNome.getText();
-        String idade = campoIdade.getText();
-        String email = campoEmail.getText();
-        String senha = campoSenha.getText();
-
-        usuario = new Usuario(nome, idade, email, senha);
-        usuarios.add(usuario);
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/data/contas.data"))) {
-            for (Usuario usuario : usuarios) {
-                String line = usuario.getNome() + "," +
-                        usuario.getIdade() + "," +
-                        usuario.getEmail() + "," +
-                        usuario.getSenha();
-                writer.write(line);
-                writer.newLine();
-            }
-            System.out.println("Conta registrada com sucesso!");
-        } catch (IOException e) {
-            System.out.println("Erro ao registrar conta: " + e.getMessage());
+        Boolean dadosAceitos = true;
+        avisoIdade.setText(""); avisoEmail.setText("");
+        try {
+            Integer.parseInt(campoIdade.getText());
+        } catch (Exception e) {
+            avisoIdade.setText("Idade inválida");
+            dadosAceitos = false;
         }
 
-        switchToHome();
+        if (!(campoEmail.getText().contains("@") && campoEmail.getText().contains("."))) {
+            avisoEmail.setText("Email inválido");
+            dadosAceitos = false;
+        }
 
+        if (dadosAceitos) {
+            carregarContas();
+            String nome = campoNome.getText();
+            String idade = campoIdade.getText();
+            String email = campoEmail.getText();
+            String senha = campoSenha.getText();
+
+            usuario = new Usuario(nome, idade, email, senha);
+            usuarios.add(usuario);
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/data/contas.data"))) {
+                for (Usuario usuario : usuarios) {
+                    String line = usuario.getNome() + "," +
+                            usuario.getIdade() + "," +
+                            usuario.getEmail() + "," +
+                            usuario.getSenha();
+                    writer.write(line);
+                    writer.newLine();
+                }
+                System.out.println("Conta registrada com sucesso!");
+            } catch (IOException e) {
+                System.out.println("Erro ao registrar conta: " + e.getMessage());
+            }
+
+            switchToHome();
+        }
     }
 
     public void loginUsuario() throws IOException {

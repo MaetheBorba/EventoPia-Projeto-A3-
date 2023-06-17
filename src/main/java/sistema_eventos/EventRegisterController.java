@@ -25,6 +25,9 @@ public class EventRegisterController {
     @FXML
     private TextField campoDescricao;
 
+    @FXML
+    private Label avisoHorario;
+
     
     @FXML
     private void switchToHome() throws IOException {
@@ -34,41 +37,49 @@ public class EventRegisterController {
     
 
     public void cadastrarEvento() throws IOException {
-        eventos = Evento.carregarEventos();
-        String nome = campoNome.getText();
-        String endereco = campoEndereco.getText();
-        String categoria = campoCategoria.getText();
-        String horarioStr = campoHorario.getText();
+        Boolean dadosAceitos = true;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        LocalDateTime horario = LocalDateTime.parse(horarioStr, formatter);
-        String descricao = campoDescricao.getText();
 
-        evento = new Evento(nome, endereco, categoria, horario, descricao);
-        eventos.add(evento);
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/data/eventos/" + nome + ".data"))) {
-            System.out.println("Evento salvo com sucesso!");
-        } catch (IOException e) {
-            System.out.println("Erro ao salvar evento: " + e.getMessage());
+        try {
+            LocalDateTime.parse(campoHorario.getText(), formatter);
+        } catch (Exception e) {
+            avisoHorario.setText("Horário inválido.\nSiga o formato dd/MM/yyyy HH:mm");
+            dadosAceitos = false;
         }
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/data/events.data"))) {
-            for (Evento evento : eventos) {
-                String line = evento.getNome() + "," +
-                        evento.getEndereco() + "," +
-                        evento.getCategoria() + "," +
-                        evento.getHorario().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + "," +
-                        evento.getDescricao();
-                writer.write(line);
-                writer.newLine();
+        if (dadosAceitos) {
+            eventos = Evento.carregarEventos();
+            String nome = campoNome.getText();
+            String endereco = campoEndereco.getText();
+            String categoria = campoCategoria.getText();
+            LocalDateTime horario = LocalDateTime.parse(campoHorario.getText(), formatter);
+            String descricao = campoDescricao.getText();
+            evento = new Evento(nome, endereco, categoria, horario, descricao);
+            eventos.add(evento);
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/data/eventos/" + nome + ".data"))) {
+                System.out.println("Evento salvo com sucesso!");
+            } catch (IOException e) {
+                System.out.println("Erro ao salvar evento: " + e.getMessage());
             }
-            System.out.println("Eventos salvos com sucesso!");
-        } catch (IOException e) {
-            System.out.println("Erro ao salvar eventos: " + e.getMessage());
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/data/events.data"))) {
+                for (Evento evento : eventos) {
+                    String line = evento.getNome() + "," +
+                            evento.getEndereco() + "," +
+                            evento.getCategoria() + "," +
+                            evento.getHorario().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + "," +
+                            evento.getDescricao();
+                    writer.write(line);
+                    writer.newLine();
+                }
+                System.out.println("Eventos salvos com sucesso!");
+            } catch (IOException e) {
+                System.out.println("Erro ao salvar eventos: " + e.getMessage());
+            }
+
+            switchToHome();
         }
-
-        switchToHome();
-
     }
 }
 

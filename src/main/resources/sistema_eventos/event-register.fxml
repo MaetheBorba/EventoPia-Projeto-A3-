@@ -68,5 +68,6 @@
             </ImageView>
          </children>
       </Pane>
+      <Label fx:id="avisoHorario" layoutX="395.0" layoutY="251.0" textFill="RED" />
    </children>
 </AnchorPane>
