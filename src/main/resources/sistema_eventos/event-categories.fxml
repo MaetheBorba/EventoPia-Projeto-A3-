@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistema_eventos.EventController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistema_eventos.EventCategoriesController">
    <children>
       <VBox id="optionsPane" prefHeight="400.0" prefWidth="120.0">
          <children>
@@ -120,28 +120,23 @@
             </VBox>
          </children>
       </VBox>
-      <ScrollPane layoutX="120.0" prefHeight="400.0" prefWidth="481.0">
+      <HBox layoutX="120.0" layoutY="14.0" prefHeight="28.0" prefWidth="480.0">
+         <children>
+            <Button id="btn" fx:id="btnCategoriaSocial" mnemonicParsing="false" onAction="#displayCategorySocial" text="Social" />
+            <Button id="btn" fx:id="btnCategoriaCorporativo" mnemonicParsing="false" onAction="#displayCategoryCorporativo" text="Corporativo" />
+            <Button id="btn" fx:id="btnCategoriaEsportivo" mnemonicParsing="false" onAction="#displayCategoryEsportivo" text="Esportivo" />
+            <Button id="btn" fx:id="btnCategoriaReligioso" mnemonicParsing="false" onAction="#displayCategoryReligioso" text="Religioso" />
+         </children>
+      </HBox>
+      <HBox layoutX="120.0" layoutY="42.0" prefHeight="28.0" prefWidth="480.0">
+         <children>
+            <Button id="btn" fx:id="btnCategoriaCultural" mnemonicParsing="false" onAction="#displayCategoryCultural" text="Cultural/Entretenimento" />
+            <Button id="btn" fx:id="btnCategoriaAcademico" mnemonicParsing="false" onAction="#displayCategoryAcademico" text="Acadêmico/Educativo" />
+         </children>
+      </HBox>
+      <ScrollPane layoutX="120.0" layoutY="67.0" prefHeight="333.0" prefWidth="481.0">
          <content>
-            <VBox fx:id="event" prefHeight="399.0" prefWidth="464.0">
-               <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/icon-eventopia.png" />
-                     </image></ImageView>
-                  <Label fx:id="dataNome" text="Label" />
-                  <Label fx:id="dataEndereco" text="Label" />
-                  <Label fx:id="dataCategoria" text="Label" />
-                  <Label fx:id="dataHorario" text="Label" />
-                  <Label fx:id="dataDescricao" text="Label" />
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#addParticipante" text="Confirmar participação" />
-                        <Button mnemonicParsing="false" onAction="#removeParticipante" text="Cancelar participação" />
-                     </children>
-                  </HBox>
-                  <Label fx:id="statusParticipacao" text="Sua participação neste evento não está confirmada" />
-               </children>
-            </VBox>
+            <VBox fx:id="eventList" prefHeight="333.0" prefWidth="464.0" />
          </content>
       </ScrollPane>
    </children>

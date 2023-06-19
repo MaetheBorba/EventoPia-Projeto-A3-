@@ -110,7 +110,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventList" prefWidth="110.0" text="Categorias">
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventCategories" prefWidth="110.0" text="Categorias">
                      <graphic>
                         <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>

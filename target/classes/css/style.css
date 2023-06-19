@@ -96,3 +96,13 @@
 #event-item-image {
     -fx-alignment: center-left;
 }
+
+#btn-selected {
+    -fx-font-weight: bold;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-background-color: rgba(0,0,0,.35);
+}

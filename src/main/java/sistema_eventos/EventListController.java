@@ -59,30 +59,21 @@ public class EventListController implements Initializable {
         App.setRoot("event-list");
     }
 
-    public void addParticipante() {
-        for (Evento evento : eventos) {
-            if (evento.getNome().matches(dataNome.getText())) {
-                Sessao sessao = new Sessao();
-                String usuarioAtual = sessao.getUsuarioAtual();
-                evento.addParticipante(usuarioAtual, evento.getNome());
-                participacaoEvento.setText("Sua participação está confirmada");
-
-                break;
-            }
-        }
+    @FXML
+    private void switchToEventCategories() throws IOException {
+        App.setRoot("event-categories");
+    }
+    
+    @FXML
+    private void switchToEventNext() throws IOException {
+        App.setRoot("event-next");
     }
 
-    public void removeParticipante() {
-        for (Evento evento : eventos) {
-            if (evento.getNome().matches(dataNome.getText())) {
-                Sessao sessao = new Sessao();
-                String usuarioAtual = sessao.getUsuarioAtual();
-                evento.removeParticipante(usuarioAtual, evento.getNome());
-                participacaoEvento.setText("Sua participação não está confirmada");
-                break;
-            }
-        }
+    @FXML
+    private void switchToEventPrevious() throws IOException {
+        App.setRoot("event-previous");
     }
+
 
 // roda quando a página é inicializada
     @Override
@@ -92,33 +83,6 @@ public class EventListController implements Initializable {
             HBox eventItem = new EventListItem(evento);
             eventList.getChildren().add(eventItem);
         }
-// roda quando um evento da lista é selecionado
-        /*eventList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
-                String eventoSelecionado = eventList.getSelectionModel().getSelectedItem();
-                Sessao sessao = new Sessao();
-                String usuarioAtual = sessao.getUsuarioAtual();
-                
-                for (Evento evento : eventos) {
-                    if (evento.getNome() == eventoSelecionado) {
-                        dataNome.setText(evento.getNome());
-                        dataEndereco.setText(evento.getEndereco());
-                        dataCategoria.setText(evento.getCategoria());
-                        dataHorario.setText(evento.getHorario().toString().replace("T", " "));
-                        dataDescricao.setText(evento.getDescricao());
-                        if (evento.isParticipante(usuarioAtual, evento.getNome())) {
-                            participacaoEvento.setText("Sua participação está confirmada");
-                        }
-                        else {
-                            participacaoEvento.setText("Sua participação não está confirmada");
-                        }
-                        break;
-                    }
-                }
-            }
-        });*/
     }
-
 }
 

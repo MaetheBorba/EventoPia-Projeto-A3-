@@ -60,6 +60,21 @@ public class AccountController {
         App.setRoot("account-register");
     }
 
+    @FXML
+    private void switchToEventCategories() throws IOException {
+        App.setRoot("event-categories");
+    }
+    
+    @FXML
+    private void switchToEventNext() throws IOException {
+        App.setRoot("event-next");
+    }
+
+    @FXML
+    private void switchToEventPrevious() throws IOException {
+        App.setRoot("event-previous");
+    }
+
     public static void carregarContas() {
         try (BufferedReader reader = new BufferedReader(new FileReader("src/main/data/contas.data"))) {
             String line;

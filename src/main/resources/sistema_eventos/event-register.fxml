@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -11,15 +12,16 @@
 
 <AnchorPane id="loginPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistema_eventos.EventRegisterController">
    <children>
+      <Label fx:id="avisoCategoria" layoutX="395.0" layoutY="211.0" textFill="RED" />
       <Label id="h2" layoutX="206.0" layoutY="68.0" text="Crie um evento" />
       <Pane layoutX="186.0" layoutY="199.0" prefHeight="40.0" prefWidth="200.0">
          <children>
-            <TextField id="inputBox" fx:id="campoCategoria" layoutX="27.0" layoutY="9.0" prefWidth="173.0" promptText="Categoria" />
             <ImageView id="icon" fitHeight="20.0" fitWidth="20.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/tags.png" />
                </image>
             </ImageView>
+            <ChoiceBox fx:id="campoCategoria" layoutX="27.0" layoutY="8.0" prefHeight="22.0" prefWidth="173.0" />
          </children>
       </Pane>
       <Pane layoutX="186.0" layoutY="239.0" prefHeight="40.0" prefWidth="200.0">
@@ -173,5 +175,8 @@
             </VBox>
          </children>
       </VBox>
+      <Label fx:id="avisoNome" layoutX="395.0" layoutY="131.0" textFill="RED" />
+      <Label fx:id="avisoEndereco" layoutX="395.0" layoutY="171.0" textFill="RED" />
+      <Label fx:id="avisoDescricao" layoutX="395.0" layoutY="291.0" textFill="RED" />
    </children>
 </AnchorPane>

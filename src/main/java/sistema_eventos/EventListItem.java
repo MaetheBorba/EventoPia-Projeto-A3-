@@ -1,7 +1,10 @@
 package sistema_eventos;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -40,8 +43,15 @@ public class EventListItem extends HBox{
             @Override
             public void handle(ActionEvent event) {
                 try {
+                    try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/data/temp.data"))) {
+                        writer.write(evento.getNome());
+                    } catch (IOException e) {
+                        System.out.println(e);
+                    }
                     switchToEvent();
-                } catch (IOException e) {}
+                } catch (IOException e) {
+                    System.out.println(e);
+                }
             }
         });
 

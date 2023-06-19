@@ -32,6 +32,20 @@ public class HomeController {
         App.setRoot("event-list");
     }
 
+    @FXML
+    private void switchToEventCategories() throws IOException {
+        App.setRoot("event-categories");
+    }
+    
+    @FXML
+    private void switchToEventNext() throws IOException {
+        App.setRoot("event-next");
+    }
+
+    @FXML
+    private void switchToEventPrevious() throws IOException {
+        App.setRoot("event-previous");
+    }
 }
 
 

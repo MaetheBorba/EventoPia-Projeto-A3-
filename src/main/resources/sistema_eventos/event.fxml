@@ -6,6 +6,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistema_eventos.EventController">
@@ -123,7 +124,22 @@
          <content>
             <VBox fx:id="event" prefHeight="399.0" prefWidth="464.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icon-eventopia.png" />
+                     </image></ImageView>
+                  <Label fx:id="dataNome" text="Label" />
+                  <Label fx:id="dataEndereco" text="Label" />
+                  <Label fx:id="dataCategoria" text="Label" />
+                  <Label fx:id="dataHorario" text="Label" />
+                  <Label fx:id="dataDescricao" text="Label" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#addParticipante" text="Confirmar participação" />
+                        <Button mnemonicParsing="false" onAction="#removeParticipante" text="Cancelar participação" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="statusParticipacao" text="Sua participação neste evento não está confirmada" />
                </children>
             </VBox>
          </content>
