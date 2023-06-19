@@ -7,7 +7,7 @@ public class HomeController {
 
     
     @FXML
-    public static void switchToHome() throws IOException {
+    private void switchToHome() throws IOException {
         App.setRoot("home");
     }
 
@@ -18,7 +18,13 @@ public class HomeController {
 
     @FXML
     private void switchToEventRegister() throws IOException {
-        App.setRoot("event-register");
+        Sessao sessao = new Sessao();
+        if (sessao.getUsuarioAtual().matches("")) {
+            App.setRoot("account-login");
+        }
+        else {
+            App.setRoot("event-register");
+        }
     }
 
     @FXML

@@ -5,9 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.shape.Path;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -21,7 +21,8 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("home"));
         stage.setScene(scene);
-        stage.setTitle("Eventopia");
+        stage.setTitle("EventoPia");
+        stage.getIcons().add(new Image(new File("src/main/resources/images/icon-eventopia.png").toURI().toString()));
         stage.show();
     }
 

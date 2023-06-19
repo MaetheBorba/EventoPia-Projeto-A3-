@@ -35,6 +35,27 @@ public class AccountController {
     }
 
     @FXML
+    private void switchToAccountLogin() throws IOException {
+        App.setRoot("account-login");
+    }
+
+    @FXML
+    private void switchToEventRegister() throws IOException {
+        Sessao sessao = new Sessao();
+        if (sessao.getUsuarioAtual().matches("")) {
+            App.setRoot("account-login");
+        }
+        else {
+            App.setRoot("event-register");
+        }
+    }
+
+    @FXML
+    private void switchToEventList() throws IOException {
+        App.setRoot("event-list");
+    }
+
+    @FXML
     private void switchToAccountRegister() throws IOException {
         App.setRoot("account-register");
     }

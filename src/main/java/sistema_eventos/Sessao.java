@@ -7,14 +7,24 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Sessao {
-    String usuarioAtual;
+    String usuarioAtual; Boolean salvarSessao;
 
-    public Sessao(String setUsuarioAtual) {
-        this.usuarioAtual = setUsuarioAtual;
+    public Sessao() {
+        carregarSessao();
     }
 
     public String getUsuarioAtual() {
         return usuarioAtual;
+    }
+    public void setUsuarioAtual(String usuarioAtual) {
+        this.usuarioAtual = usuarioAtual;
+    }
+
+    public Boolean getSalvarSessao() {
+        return salvarSessao;
+    }
+    public void setSalvarSessao(Boolean salvarSessao) {
+        this.salvarSessao = salvarSessao;
     }
 
     public static void atualizarSessao(String usuarioAtual) throws IOException {
@@ -31,7 +41,7 @@ public class Sessao {
 
     }
 
-    public static String carregarSessao() {
+    public void carregarSessao() {
         String sessaoAtual="";
         try (BufferedReader reader = new BufferedReader(new FileReader("src/main/data/sessao.data"))) {
             String line;
@@ -44,6 +54,6 @@ public class Sessao {
         } catch (IOException e) {
             System.out.println("Erro ao carregar sessão: " + e.getMessage());
         }
-        return sessaoAtual;
+        setUsuarioAtual(sessaoAtual);
     }
 }
