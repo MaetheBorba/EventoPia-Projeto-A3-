@@ -117,6 +117,8 @@ public class EventParticipatingController implements Initializable {
             accountName.setText(usuarioAtual);
             accountName.setVisible(true);
             btnSair.setVisible(true);
+            btnLogin.setVisible(false);
+            btnRegister.setVisible(false);
         }
 
         eventos = Evento.carregarEventos();

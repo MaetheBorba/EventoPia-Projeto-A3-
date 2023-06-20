@@ -160,6 +160,8 @@ public class EventController implements Initializable{
             accountName.setText(usuarioAtual);
             accountName.setVisible(true);
             btnSair.setVisible(true);
+            btnLogin.setVisible(false);
+            btnRegister.setVisible(false);
         }
 
         try (BufferedReader reader = new BufferedReader(new FileReader("src/main/data/temp.data"))) {
