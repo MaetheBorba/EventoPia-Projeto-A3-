@@ -35,8 +35,10 @@ public class EventListItem extends HBox{
         endereco.setId("event-item-info");
         Label categoria = new Label("Categoria: " + evento.getCategoria());
         categoria.setId("event-item-info");
-        Label horario = new Label("Horário: " + evento.getHorario().toString().replace("T", " ").replace("-", "/"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        Label horario = new Label("Horário: " + evento.getHorario().format(formatter).toString());
         horario.setId("event-item-info");
+        
         Button eventItemBtn = new Button("Ver mais");
         eventItemBtn.setId("event-item-btn");
         eventItemBtn.setOnAction(new EventHandler<ActionEvent>() {

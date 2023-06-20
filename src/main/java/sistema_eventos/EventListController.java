@@ -2,6 +2,7 @@ package sistema_eventos;
 
 import java.io.*;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import javafx.beans.value.ChangeListener;
@@ -15,7 +16,10 @@ public class EventListController implements Initializable {
 
     private static List<Evento> eventos = new ArrayList<>();
 
-    
+    @FXML
+    private Label accountName;
+    @FXML
+    private Button btnSair;
 
     @FXML
     private VBox eventList;
@@ -33,9 +37,17 @@ public class EventListController implements Initializable {
     private Label participacaoEvento;
 
     
+    // funções do menu de opções
     @FXML
     private void switchToHome() throws IOException {
         App.setRoot("home");
+    }
+
+    @FXML
+    private void logoutUsuario() throws IOException {
+        accountName.setText("Visitante");
+        Sessao.atualizarSessao("");
+        switchToHome();
     }
 
     @FXML
@@ -78,7 +90,22 @@ public class EventListController implements Initializable {
 // roda quando a página é inicializada
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        // mostrar nome de usuário no menu de opções
+        Sessao sessao = new Sessao();
+        String usuarioAtual = sessao.getUsuarioAtual();
+        
+        if (!(usuarioAtual.matches(""))) {
+            accountName.setText(usuarioAtual);
+            accountName.setVisible(true);
+            btnSair.setVisible(true);
+        }
+
         eventos = Evento.carregarEventos();
+        
+        // remover eventos passados
+        eventos.removeIf(evento -> evento.getHorario().isBefore(LocalDateTime.now()));
+
         for (Evento evento : eventos) {
             HBox eventItem = new EventListItem(evento);
             eventList.getChildren().add(eventItem);

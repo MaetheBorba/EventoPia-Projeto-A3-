@@ -18,7 +18,10 @@ public class EventCategoriesController implements Initializable {
 
     private static List<Evento> eventos = new ArrayList<>();
 
-    
+    @FXML
+    private Label accountName;
+    @FXML
+    private Button btnSair;
 
     @FXML
     private VBox eventList;
@@ -37,9 +40,17 @@ public class EventCategoriesController implements Initializable {
     private Button btnCategoriaEsportivo;
 
     
+    // funções do menu de opções
     @FXML
     private void switchToHome() throws IOException {
         App.setRoot("home");
+    }
+
+    @FXML
+    private void logoutUsuario() throws IOException {
+        accountName.setText("Visitante");
+        Sessao.atualizarSessao("");
+        switchToHome();
     }
 
     @FXML
@@ -77,6 +88,7 @@ public class EventCategoriesController implements Initializable {
     private void switchToEventPrevious() throws IOException {
         App.setRoot("event-previous");
     }
+    //
 
     @FXML
     private void displayCategorySocial() throws IOException {
@@ -156,6 +168,16 @@ public class EventCategoriesController implements Initializable {
 // roda quando a página é inicializada
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        // mostrar nome de usuário no menu de opções
+        Sessao sessao = new Sessao();
+        String usuarioAtual = sessao.getUsuarioAtual();
+        if (!(usuarioAtual.matches(""))) {
+            accountName.setText(usuarioAtual);
+            accountName.setVisible(true);
+            btnSair.setVisible(true);
+        }
+        
     }
 }
 

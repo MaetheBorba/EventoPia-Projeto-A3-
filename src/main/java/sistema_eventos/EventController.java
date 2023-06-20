@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -19,6 +20,11 @@ import javafx.scene.layout.VBox;
 public class EventController implements Initializable{
 
     private static List<Evento> eventos = new ArrayList<>();
+
+    @FXML
+    private Label accountName;
+    @FXML
+    private Button btnSair;
 
     @FXML
     private VBox event;
@@ -37,9 +43,17 @@ public class EventController implements Initializable{
     @FXML
     private Label statusParticipacao;
 
+    // funções do menu de opções
     @FXML
     private void switchToHome() throws IOException {
         App.setRoot("home");
+    }
+
+    @FXML
+    private void logoutUsuario() throws IOException {
+        accountName.setText("Visitante");
+        Sessao.atualizarSessao("");
+        switchToHome();
     }
 
     @FXML
@@ -77,6 +91,7 @@ public class EventController implements Initializable{
     private void switchToEventPrevious() throws IOException {
         App.setRoot("event-previous");
     }
+    //
 
     public void addParticipante() {
         for (Evento evento : eventos) {
@@ -107,8 +122,16 @@ public class EventController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         String eventoSelecionado="";
         eventos = Evento.carregarEventos();
+
+        // mostrar nome de usuário no menu de opções
         Sessao sessao = new Sessao();
         String usuarioAtual = sessao.getUsuarioAtual();
+        
+        if (!(usuarioAtual.matches(""))) {
+            accountName.setText(usuarioAtual);
+            accountName.setVisible(true);
+            btnSair.setVisible(true);
+        }
 
         try (BufferedReader reader = new BufferedReader(new FileReader("src/main/data/temp.data"))) {
             eventoSelecionado = reader.readLine();
@@ -121,7 +144,8 @@ public class EventController implements Initializable{
                 dataNome.setText(evento.getNome());
                 dataEndereco.setText(evento.getEndereco());
                 dataCategoria.setText(evento.getCategoria());
-                dataHorario.setText(evento.getHorario().toString().replace("T", " ").replace("-", "/"));
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                dataHorario.setText(evento.getHorario().format(formatter).toString());
                 dataDescricao.setText(evento.getDescricao());
 
                 if (evento.isParticipante(usuarioAtual, eventoSelecionado)) {

@@ -1,14 +1,32 @@
 package sistema_eventos;
 
 import java.io.*;
-import javafx.fxml.*;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class HomeController {
+import javafx.fxml.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+
+public class HomeController implements Initializable{
+
+    @FXML
+    private Label accountName;
+    @FXML
+    private Button btnSair;
 
     
+    // funções do menu de opções
     @FXML
     private void switchToHome() throws IOException {
         App.setRoot("home");
+    }
+
+    @FXML
+    private void logoutUsuario() throws IOException {
+        accountName.setText("Visitante");
+        Sessao.atualizarSessao("");
+        switchToHome();
     }
 
     @FXML
@@ -45,6 +63,20 @@ public class HomeController {
     @FXML
     private void switchToEventPrevious() throws IOException {
         App.setRoot("event-previous");
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        // mostrar nome de usuário no menu de opções
+        Sessao sessao = new Sessao();
+        String usuarioAtual = sessao.getUsuarioAtual();
+        if (!(usuarioAtual.matches(""))) {
+            accountName.setText(usuarioAtual);
+            accountName.setVisible(true);
+            btnSair.setVisible(true);
+        }
+        
     }
 }
 

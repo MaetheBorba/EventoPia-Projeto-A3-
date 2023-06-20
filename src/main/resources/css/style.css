@@ -50,7 +50,7 @@
     -fx-border-width: .1;
 }
 
-#optionsPane .label {
+#optionsPane #section-title {
     -fx-font-size: 15;
     -fx-pref-width: 129;
     -fx-alignment: center;

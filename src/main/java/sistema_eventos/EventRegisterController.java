@@ -17,6 +17,11 @@ public class EventRegisterController implements Initializable {
     private String[] categorias = {"Social","Corporativo","Religioso","Acadêmico/Educativo","Cultural/Entretenimento","Esportivo"};
 
     @FXML
+    private Label accountName;
+    @FXML
+    private Button btnSair;
+
+    @FXML
     private TextField campoNome;
     @FXML
     private TextField campoEndereco;
@@ -42,6 +47,13 @@ public class EventRegisterController implements Initializable {
     @FXML
     private void switchToHome() throws IOException {
         App.setRoot("home");
+    }
+
+    @FXML
+    private void logoutUsuario() throws IOException {
+        accountName.setText("Visitante");
+        Sessao.atualizarSessao("");
+        switchToHome();
     }
 
     @FXML
@@ -151,6 +163,17 @@ public class EventRegisterController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        // mostrar nome de usuário no menu de opções
+        Sessao sessao = new Sessao();
+        String usuarioAtual = sessao.getUsuarioAtual();
+        if (!(usuarioAtual.matches(""))) {
+            accountName.setText(usuarioAtual);
+            accountName.setVisible(true);
+            btnSair.setVisible(true);
+        }
+
+        // adiciona categorias às opções do campo de categoria
         campoCategoria.setValue("Categoria");
         campoCategoria.getItems().addAll(categorias);
     }

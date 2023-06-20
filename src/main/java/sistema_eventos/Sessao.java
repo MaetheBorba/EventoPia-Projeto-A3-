@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Sessao {
-    String usuarioAtual; Boolean salvarSessao;
+    String usuarioAtual;
 
     public Sessao() {
         carregarSessao();
@@ -20,12 +20,6 @@ public class Sessao {
         this.usuarioAtual = usuarioAtual;
     }
 
-    public Boolean getSalvarSessao() {
-        return salvarSessao;
-    }
-    public void setSalvarSessao(Boolean salvarSessao) {
-        this.salvarSessao = salvarSessao;
-    }
 
     public static void atualizarSessao(String usuarioAtual) throws IOException {
 

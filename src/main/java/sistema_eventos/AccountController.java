@@ -1,14 +1,20 @@
 package sistema_eventos;
 
 import java.io.*;
+import java.net.URL;
 import java.util.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 
-public class AccountController {
+public class AccountController implements Initializable{
 
     private static List<Usuario> usuarios = new ArrayList<>();
     private static Usuario usuario;
+
+    @FXML
+    private Label accountName;
+    @FXML
+    private Button btnSair;
 
     @FXML
     private TextField campoNome;
@@ -28,10 +34,17 @@ public class AccountController {
     @FXML
     private Label avisoEmail;
 
-    
+    // funções do menu de opções
     @FXML
     private void switchToHome() throws IOException {
         App.setRoot("home");
+    }
+
+    @FXML
+    private void logoutUsuario() throws IOException {
+        accountName.setText("Visitante");
+        Sessao.atualizarSessao("");
+        switchToHome();
     }
 
     @FXML
@@ -74,6 +87,7 @@ public class AccountController {
     private void switchToEventPrevious() throws IOException {
         App.setRoot("event-previous");
     }
+    //
 
     public static void carregarContas() {
         try (BufferedReader reader = new BufferedReader(new FileReader("src/main/data/contas.data"))) {
@@ -98,6 +112,8 @@ public class AccountController {
     public void cadastrarUsuario() throws IOException {
         Boolean dadosAceitos = true;
         avisoIdade.setText(""); avisoEmail.setText("");
+
+        // validação dos inputs
         try {
             Integer.parseInt(campoIdade.getText());
         } catch (Exception e) {
@@ -105,7 +121,7 @@ public class AccountController {
             dadosAceitos = false;
         }
 
-        if (!(campoEmail.getText().contains("@") && campoEmail.getText().contains("."))) {
+        if (!(campoEmail.getText().matches("\\w{1,}@[a-zA-Z]{1,}.\\w{2,3}"))) {
             avisoEmail.setText("Email inválido");
             dadosAceitos = false;
         }
@@ -160,6 +176,19 @@ public class AccountController {
         }
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        // mostrar nome de usuário no menu de opções
+        Sessao sessao = new Sessao();
+        String usuarioAtual = sessao.getUsuarioAtual();
+        if (!(usuarioAtual.matches(""))) {
+            accountName.setText(usuarioAtual);
+            accountName.setVisible(true);
+            btnSair.setVisible(true);
+        }
+        
+    }
 }
 
 
