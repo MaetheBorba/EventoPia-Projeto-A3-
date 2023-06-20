@@ -11,11 +11,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class EventNextController implements Initializable {
+public class EventCreatedController implements Initializable {
 
     private static List<Evento> eventos = new ArrayList<>();
-
-    
 
     @FXML
     private Label accountName;
@@ -29,6 +27,7 @@ public class EventNextController implements Initializable {
     @FXML
     private VBox eventList;
 
+    
     // funções do menu de opções
     @FXML
     private void switchToHome() throws IOException {
@@ -109,7 +108,7 @@ public class EventNextController implements Initializable {
 // roda quando a página é inicializada
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+
         // mostrar nome de usuário no menu de opções
         Sessao sessao = new Sessao();
         String usuarioAtual = sessao.getUsuarioAtual();
@@ -122,7 +121,7 @@ public class EventNextController implements Initializable {
 
         eventos = Evento.carregarEventos();
         ZoneOffset offset = ZoneOffset.ofTotalSeconds(0);
-
+        
         // remover eventos passados
         eventos.removeIf(evento -> evento.getHorario().isBefore(LocalDateTime.now()));
 
@@ -132,11 +131,13 @@ public class EventNextController implements Initializable {
                 return o1.getHorario().toInstant(offset).compareTo(o2.getHorario().toInstant(offset));
             }
         });
-        
+
         // adicionar eventos na lista
         for (Evento evento : eventos) {
-            HBox eventItem = new EventListItem(evento);
-            eventList.getChildren().add(eventItem);
+            if (evento.getCriador().matches(usuarioAtual)) {
+                HBox eventItem = new EventListItem(evento);
+                eventList.getChildren().add(eventItem);
+            } 
         }
     }
 }

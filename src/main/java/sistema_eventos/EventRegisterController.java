@@ -19,6 +19,10 @@ public class EventRegisterController implements Initializable {
     @FXML
     private Label accountName;
     @FXML
+    private Button btnLogin;
+    @FXML
+    private Button btnRegister;
+    @FXML
     private Button btnSair;
 
     @FXML
@@ -62,6 +66,11 @@ public class EventRegisterController implements Initializable {
     }
 
     @FXML
+    private void switchToAccountRegister() throws IOException {
+        App.setRoot("account-register");
+    }
+
+    @FXML
     private void switchToEventRegister() throws IOException {
         Sessao sessao = new Sessao();
         if (sessao.getUsuarioAtual().matches("")) {
@@ -69,6 +78,28 @@ public class EventRegisterController implements Initializable {
         }
         else {
             App.setRoot("event-register");
+        }
+    }
+
+    @FXML
+    private void switchToEventParticipating() throws IOException {
+        Sessao sessao = new Sessao();
+        if (sessao.getUsuarioAtual().matches("")) {
+            App.setRoot("account-login");
+        }
+        else {
+            App.setRoot("event-participating");
+        }
+    }
+
+    @FXML
+    private void switchToEventCreated() throws IOException {
+        Sessao sessao = new Sessao();
+        if (sessao.getUsuarioAtual().matches("")) {
+            App.setRoot("account-login");
+        }
+        else {
+            App.setRoot("event-created");
         }
     }
 
@@ -128,12 +159,16 @@ public class EventRegisterController implements Initializable {
 
         if (dadosAceitos) {
             eventos = Evento.carregarEventos();
+            Sessao sessao = new Sessao();
+
             String nome = campoNome.getText();
             String endereco = campoEndereco.getText();
             String categoria = campoCategoria.getValue();
             LocalDateTime horario = LocalDateTime.parse(campoHorario.getText(), formatter);
             String descricao = campoDescricao.getText();
-            evento = new Evento(nome, endereco, categoria, horario, descricao);
+            String criador = sessao.getUsuarioAtual();
+
+            evento = new Evento(nome, endereco, categoria, horario, descricao, criador);
             eventos.add(evento);
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/data/eventos/" + nome + ".data"))) {
@@ -148,7 +183,8 @@ public class EventRegisterController implements Initializable {
                             evento.getEndereco() + "," +
                             evento.getCategoria() + "," +
                             evento.getHorario().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + "," +
-                            evento.getDescricao();
+                            evento.getDescricao() + "," +
+                            evento.getCriador();
                     writer.write(line);
                     writer.newLine();
                 }

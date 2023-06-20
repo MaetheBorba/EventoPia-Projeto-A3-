@@ -13,6 +13,10 @@ public class HomeController implements Initializable{
     @FXML
     private Label accountName;
     @FXML
+    private Button btnLogin;
+    @FXML
+    private Button btnRegister;
+    @FXML
     private Button btnSair;
 
     
@@ -35,6 +39,11 @@ public class HomeController implements Initializable{
     }
 
     @FXML
+    private void switchToAccountRegister() throws IOException {
+        App.setRoot("account-register");
+    }
+
+    @FXML
     private void switchToEventRegister() throws IOException {
         Sessao sessao = new Sessao();
         if (sessao.getUsuarioAtual().matches("")) {
@@ -42,6 +51,28 @@ public class HomeController implements Initializable{
         }
         else {
             App.setRoot("event-register");
+        }
+    }
+
+    @FXML
+    private void switchToEventParticipating() throws IOException {
+        Sessao sessao = new Sessao();
+        if (sessao.getUsuarioAtual().matches("")) {
+            App.setRoot("account-login");
+        }
+        else {
+            App.setRoot("event-participating");
+        }
+    }
+
+    @FXML
+    private void switchToEventCreated() throws IOException {
+        Sessao sessao = new Sessao();
+        if (sessao.getUsuarioAtual().matches("")) {
+            App.setRoot("account-login");
+        }
+        else {
+            App.setRoot("event-created");
         }
     }
 
@@ -75,6 +106,8 @@ public class HomeController implements Initializable{
             accountName.setText(usuarioAtual);
             accountName.setVisible(true);
             btnSair.setVisible(true);
+            btnLogin.setVisible(false);
+            btnRegister.setVisible(false);
         }
         
     }

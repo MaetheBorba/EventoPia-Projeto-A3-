@@ -36,7 +36,7 @@
                         </ImageView>
                      </graphic>
                   </Label>
-                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToAccountLogin" prefHeight="30.0" prefWidth="129.0" text="Login">
+                  <Button id="btn-option" fx:id="btnLogin" mnemonicParsing="false" onAction="#switchToAccountLogin" prefHeight="30.0" prefWidth="129.0" text="Login">
                      <graphic>
                         <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -45,7 +45,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToAccountLogin" prefHeight="30.0" prefWidth="129.0" text="Registrar">
+                  <Button id="btn-option" fx:id="btnRegister" mnemonicParsing="false" onAction="#switchToAccountRegister" prefHeight="30.0" prefWidth="129.0" text="Registrar">
                      <graphic>
                         <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -77,7 +77,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventList" prefHeight="30.0" prefWidth="129.0" text="Criados">
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventCreated" prefHeight="30.0" prefWidth="129.0" text="Criados">
                      <graphic>
                         <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -86,7 +86,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventList" prefHeight="30.0" prefWidth="129.0" text="Participando">
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventParticipating" prefHeight="30.0" prefWidth="129.0" text="Participando">
                      <graphic>
                         <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>

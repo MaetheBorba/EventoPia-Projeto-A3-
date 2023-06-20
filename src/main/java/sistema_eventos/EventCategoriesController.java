@@ -2,17 +2,14 @@ package sistema_eventos;
 
 import java.io.*;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.*;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.*;
 import javafx.scene.control.*;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
 
 public class EventCategoriesController implements Initializable {
 
@@ -20,6 +17,10 @@ public class EventCategoriesController implements Initializable {
 
     @FXML
     private Label accountName;
+    @FXML
+    private Button btnLogin;
+    @FXML
+    private Button btnRegister;
     @FXML
     private Button btnSair;
 
@@ -59,6 +60,11 @@ public class EventCategoriesController implements Initializable {
     }
 
     @FXML
+    private void switchToAccountRegister() throws IOException {
+        App.setRoot("account-register");
+    }
+
+    @FXML
     private void switchToEventRegister() throws IOException {
         Sessao sessao = new Sessao();
         if (sessao.getUsuarioAtual().matches("")) {
@@ -66,6 +72,28 @@ public class EventCategoriesController implements Initializable {
         }
         else {
             App.setRoot("event-register");
+        }
+    }
+
+    @FXML
+    private void switchToEventParticipating() throws IOException {
+        Sessao sessao = new Sessao();
+        if (sessao.getUsuarioAtual().matches("")) {
+            App.setRoot("account-login");
+        }
+        else {
+            App.setRoot("event-participating");
+        }
+    }
+
+    @FXML
+    private void switchToEventCreated() throws IOException {
+        Sessao sessao = new Sessao();
+        if (sessao.getUsuarioAtual().matches("")) {
+            App.setRoot("account-login");
+        }
+        else {
+            App.setRoot("event-created");
         }
     }
 
@@ -92,7 +120,7 @@ public class EventCategoriesController implements Initializable {
 
     @FXML
     private void displayCategorySocial() throws IOException {
-        eventos = Evento.carregarEventos();
+        reset();
         for (Evento evento : eventos) {
             if (evento.getCategoria().matches("Social")) {
                 HBox eventItem = new EventListItem(evento);
@@ -104,7 +132,7 @@ public class EventCategoriesController implements Initializable {
 
     @FXML
     private void displayCategoryCorporativo() throws IOException {
-        eventos = Evento.carregarEventos();
+        reset();
         for (Evento evento : eventos) {
             if (evento.getCategoria().matches("Corporativo")) {
                 HBox eventItem = new EventListItem(evento);
@@ -116,7 +144,7 @@ public class EventCategoriesController implements Initializable {
 
     @FXML
     private void displayCategoryReligioso() throws IOException {
-        eventos = Evento.carregarEventos();
+        reset();
         for (Evento evento : eventos) {
             if (evento.getCategoria().matches("Religioso")) {
                 HBox eventItem = new EventListItem(evento);
@@ -128,7 +156,7 @@ public class EventCategoriesController implements Initializable {
 
     @FXML
     private void displayCategoryAcademico() throws IOException {
-        eventos = Evento.carregarEventos();
+        reset();
         for (Evento evento : eventos) {
             if (evento.getCategoria().matches("Acad\u00EAmico/Educativo")) {
                 HBox eventItem = new EventListItem(evento);
@@ -140,7 +168,7 @@ public class EventCategoriesController implements Initializable {
 
     @FXML
     private void displayCategoryCultural() throws IOException {
-        eventos = Evento.carregarEventos();
+        reset();
         for (Evento evento : eventos) {
             if (evento.getCategoria().matches("Cultural/Entretenimento")) {
                 HBox eventItem = new EventListItem(evento);
@@ -152,7 +180,7 @@ public class EventCategoriesController implements Initializable {
 
     @FXML
     private void displayCategoryEsportivo() throws IOException {
-        eventos = Evento.carregarEventos();
+        reset();
         for (Evento evento : eventos) {
             if (evento.getCategoria().matches("Esportivo")) {
                 HBox eventItem = new EventListItem(evento);
@@ -160,6 +188,16 @@ public class EventCategoriesController implements Initializable {
             }
         }
         btnCategoriaEsportivo.setId("btn-selected");
+    }
+
+    private void reset() {
+        eventList.getChildren().clear();
+        btnCategoriaAcademico.setId("btn");
+        btnCategoriaCorporativo.setId("btn");
+        btnCategoriaCultural.setId("btn");
+        btnCategoriaEsportivo.setId("btn");
+        btnCategoriaReligioso.setId("btn");
+        btnCategoriaSocial.setId("btn");
     }
 
     
@@ -177,6 +215,19 @@ public class EventCategoriesController implements Initializable {
             accountName.setVisible(true);
             btnSair.setVisible(true);
         }
+
+        eventos = Evento.carregarEventos();
+        ZoneOffset offset = ZoneOffset.ofTotalSeconds(0);
+
+        // remover eventos passados
+        eventos.removeIf(evento -> evento.getHorario().isBefore(LocalDateTime.now()));
+
+        // organizar eventos por data e horário
+        Collections.sort(eventos, new Comparator<Evento>() {
+            public int compare(Evento o1, Evento o2) {
+                return o1.getHorario().toInstant(offset).compareTo(o2.getHorario().toInstant(offset));
+            }
+        });
         
     }
 }

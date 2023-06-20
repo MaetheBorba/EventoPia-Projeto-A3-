@@ -5,8 +5,6 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.*;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -19,22 +17,14 @@ public class EventListController implements Initializable {
     @FXML
     private Label accountName;
     @FXML
+    private Button btnLogin;
+    @FXML
+    private Button btnRegister;
+    @FXML
     private Button btnSair;
 
     @FXML
     private VBox eventList;
-    @FXML
-    private TextField dataCategoria;
-    @FXML
-    private TextField dataDescricao;
-    @FXML
-    private TextField dataEndereco;
-    @FXML
-    private TextField dataHorario;
-    @FXML
-    private Label dataNome;
-    @FXML
-    private Label participacaoEvento;
 
     
     // funções do menu de opções
@@ -56,6 +46,11 @@ public class EventListController implements Initializable {
     }
 
     @FXML
+    private void switchToAccountRegister() throws IOException {
+        App.setRoot("account-register");
+    }
+
+    @FXML
     private void switchToEventRegister() throws IOException {
         Sessao sessao = new Sessao();
         if (sessao.getUsuarioAtual().matches("")) {
@@ -63,6 +58,28 @@ public class EventListController implements Initializable {
         }
         else {
             App.setRoot("event-register");
+        }
+    }
+
+    @FXML
+    private void switchToEventParticipating() throws IOException {
+        Sessao sessao = new Sessao();
+        if (sessao.getUsuarioAtual().matches("")) {
+            App.setRoot("account-login");
+        }
+        else {
+            App.setRoot("event-participating");
+        }
+    }
+
+    @FXML
+    private void switchToEventCreated() throws IOException {
+        Sessao sessao = new Sessao();
+        if (sessao.getUsuarioAtual().matches("")) {
+            App.setRoot("account-login");
+        }
+        else {
+            App.setRoot("event-created");
         }
     }
 
@@ -106,6 +123,7 @@ public class EventListController implements Initializable {
         // remover eventos passados
         eventos.removeIf(evento -> evento.getHorario().isBefore(LocalDateTime.now()));
 
+        // adicionar eventos na lista
         for (Evento evento : eventos) {
             HBox eventItem = new EventListItem(evento);
             eventList.getChildren().add(eventItem);

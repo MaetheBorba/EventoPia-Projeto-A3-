@@ -16,13 +16,15 @@ public class Evento {
     private String categoria;
     private LocalDateTime horario;
     private String descricao;
+    private String criador;
 
-    public Evento(String nome, String endereco, String categoria, LocalDateTime horario, String descricao) {
+    public Evento(String nome, String endereco, String categoria, LocalDateTime horario, String descricao, String criador) {
         this.nome = nome;
         this.endereco = endereco;
         this.categoria = categoria;
         this.horario = horario;
         this.descricao = descricao;
+        this.criador = criador;
     }
 
     public String getNome() {
@@ -45,6 +47,10 @@ public class Evento {
         return descricao;
     }
 
+    public String getCriador() {
+        return criador;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -65,21 +71,26 @@ public class Evento {
         this.descricao = descricao;
     }
 
+    public void setCriador(String criador) {
+        this.criador = criador;
+    }
+
     public static List<Evento> carregarEventos() {
         List<Evento> eventos = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader("src/main/data/events.data"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(",");
-                if (data.length == 5) {
+                if (data.length == 6) {
                     String nome = data[0];
                     String endereco = data[1];
                     String categoria = data[2];
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
                     LocalDateTime horario = LocalDateTime.parse(data[3], formatter);
                     String descricao = data[4];
+                    String criador = data[5];
 
-                    Evento evento = new Evento(nome, endereco, categoria, horario, descricao);
+                    Evento evento = new Evento(nome, endereco, categoria, horario, descricao, criador);
                     eventos.add(evento);
                 }
             }
