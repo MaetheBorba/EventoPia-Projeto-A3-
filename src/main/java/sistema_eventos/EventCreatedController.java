@@ -2,7 +2,6 @@ package sistema_eventos;
 
 import java.io.*;
 import java.net.URL;
-import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.*;
 
@@ -124,8 +123,7 @@ public class EventCreatedController implements Initializable {
         eventos = Evento.carregarEventos();
         ZoneOffset offset = ZoneOffset.ofTotalSeconds(0);
         
-        // remover eventos passados
-        eventos.removeIf(evento -> evento.getHorario().isBefore(LocalDateTime.now()));
+        
 
         // organizar eventos por data e horário
         Collections.sort(eventos, new Comparator<Evento>() {

@@ -1,15 +1,89 @@
 * {
     -fx-font-family: "System", "sans-serif";
     -fx-focus-traversable: false;
-    -fx-text-alignment: center;
+}
+
+.root {
+    -fx-background-color: #ffd404;
+}
+
+.scroll-pane {
+    -fx-background: hidden;
+    -fx-fit-to-height: true;
+    -fx-fit-to-width: true;
+}
+
+.scroll-bar {
+    -fx-background-color: hidden;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: black;
+    -fx-background-radius: 2em;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: rgba(0,0,0,.8);
+    -fx-background-radius: 2em;
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow,
+.scroll-bar .increment-arrow:hover,
+.scroll-bar .decrement-arrow:hover {
+    -fx-border-color: hidden;
+    -fx-background-color: hidden;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar .track {
+    -fx-background-color: hidden;
 }
 
 #loginPage {
     -fx-alignment: center;
+    -fx-spacing: 1em;
+    -fx-background-color: rgba(255,255,255,0.7);
+    -fx-background-radius: 2em;
+    -fx-border-color: rgba(150,150,150,0.7);
+    -fx-border-radius: 2em;
+    -fx-border-width: 1;
 }
+
+#loginPage HBox {
+    -fx-alignment: center;
+    -fx-spacing: 5;
+}
+
+#aviso {
+    -fx-font-weight: bold;
+}
+
+#btn-round {
+    -fx-background-radius: 1em;
+    -fx-background-color: rgba(150,150,150,0.5);
+    -fx-border-radius: 1em;
+    -fx-border-width: .7;
+    -fx-border-color: rgba(150,150,150,0.7);
+    -fx-font-weight: bold;
+    -fx-font-size: 1.2em;
+    -fx-cursor: hand;
+}
+
+#btn-round:hover {
+    -fx-background-radius: 1em;
+    -fx-background-color: rgba(150,150,150,0.8);
+    -fx-border-radius: 1em;
+    -fx-border-width: .7;
+    -fx-border-color: rgba(150,150,150,0.7);
+    -fx-font-weight: bold;
+    -fx-font-size: 1.2em;
+    -fx-cursor: hand;
+}
+
 #h2 {
     -fx-alignment: center;
-    -fx-text-fill: rgba(0, 0, 0, .7);
+    -fx-text-fill: rgba(0, 0, 0, .8);
     -fx-font-size: 2em;
     -fx-font-weight: bold;
 }
@@ -17,6 +91,11 @@
 #inputBox {
     -fx-font-family: "Consolas", "sans-serif";
     -fx-focus-traversable: false;
+    -fx-background-color: none;
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-prompt-text-fill: black;
 }
 
 .check-box, .label {
@@ -46,6 +125,7 @@
 
 #optionsPane #section {
     -fx-alignment: top-center;
+    -fx-border-style: solid hidden hidden hidden;
     -fx-border-color: black;
     -fx-border-width: .1;
 }
@@ -73,14 +153,23 @@
 
 #eventList {
     -fx-alignment: center;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-focus-traversable: false;
 }
 
 #event-item {
+    -fx-background-color: rgba(255,255,255,0.7);
     -fx-border-color: black;
+    -fx-alignment: center-left;
+    -fx-wrap-text: true;
 }
 
 #event-item-info-box {
-    -fx-alignment: center;
+    -fx-alignment: center-left;
+    -fx-hgrow-policy: always;
 }
 
 #event-item-info {
@@ -99,10 +188,86 @@
 
 #btn-selected {
     -fx-font-weight: bold;
+    -fx-background-radius: 2;
+    -fx-cursor: hand;
+    -fx-background-color: rgba(0,0,0,.05);
+}
+
+#event {
+    -fx-alignment: center;  
+    -fx-spacing: .5em;
+    -fx-font-weight: bold;
+}
+
+#event-hbox {
+    -fx-spacing: .5em;
+    -fx-alignment: center;
+}
+
+#event-data {
+    -fx-spacing: .5em;
+    -fx-font-size: 1.05em;
+    -fx-wrap-text: true;
+    -fx-alignment: center-left;
+}
+
+#event-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 2em;
+    -fx-wrap-text: true;
+}
+
+#btnParticipacao {
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-background-radius: 1em;
+}
+
+#event-descricao {
+    -fx-font-weight: bold;
+    -fx-font-size: 1.3em;
+    -fx-wrap-text: true;
+    -fx-background-radius: .5em;
+    -fx-min-width: 200;
+    -fx-alignment: center;
+}
+
+#hline {
+    -fx-background-color: black;
+    -fx-pref-height: 3;
+    -fx-max-height: 3;
+}
+
+#dataDescricao {
     -fx-border-color: transparent;
     -fx-border-width: 0;
     -fx-background-radius: 0;
-    -fx-background-color: transparent;
+    -fx-wrap-text: true;
+    -fx-background: hidden;
+    -fx-control-inner-background: #ffd404;
+}
+
+#event-register {
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-spacing: .5em;
+}
+
+#event-register-data {
+    -fx-font-size: 1.05em;
+    -fx-wrap-text: true;
+}
+
+#event-register-data .text-field, .choice-box {
+    -fx-background-radius: 1em;
+}
+
+#btn-register-event {
+    -fx-font-weight: bold;
+    -fx-background-radius: 1em;
     -fx-cursor: hand;
-    -fx-background-color: rgba(0,0,0,.35);
+}
+
+#category-row {
+    -fx-font-size: 1.4em;
 }

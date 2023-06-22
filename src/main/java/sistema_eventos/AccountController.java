@@ -30,6 +30,8 @@ public class AccountController implements Initializable{
     private PasswordField campoSenha;
     
     @FXML
+    private Label aviso;
+    @FXML
     private Label avisoSenha;
     @FXML
     private Label avisoUsuario;
@@ -137,18 +139,28 @@ public class AccountController implements Initializable{
 
     public void cadastrarUsuario() throws IOException {
         Boolean dadosAceitos = true;
-        avisoIdade.setText(""); avisoEmail.setText("");
+        avisoUsuario.setVisible(false); avisoIdade.setVisible(false); avisoEmail.setVisible(false); avisoSenha.setVisible(false);
 
         // validação dos inputs
+        if (campoNome.getText().matches("")) {
+            avisoUsuario.setVisible(true);
+            dadosAceitos = false;
+        }
+
         try {
             Integer.parseInt(campoIdade.getText());
         } catch (Exception e) {
-            avisoIdade.setText("Idade inválida");
+            avisoIdade.setVisible(true);
             dadosAceitos = false;
         }
 
         if (!(campoEmail.getText().matches("\\w{1,}@[a-zA-Z]{1,}.\\w{2,3}"))) {
-            avisoEmail.setText("Email inválido");
+            avisoEmail.setVisible(true);
+            dadosAceitos = false;
+        }
+
+        if (campoSenha.getText().matches("")) {
+            avisoSenha.setVisible(true);
             dadosAceitos = false;
         }
 
@@ -178,12 +190,15 @@ public class AccountController implements Initializable{
 
             switchToHome();
         }
+        else {
+            aviso.setVisible(true);
+        }
     }
 
     public void loginUsuario() throws IOException {
         carregarContas();
         String usuarioAtual="";
-        avisoSenha.setText("");
+        avisoUsuario.setVisible(false); avisoSenha.setVisible(false);
         String nome = campoNome.getText();
         String senha = campoSenha.getText();
 
@@ -195,9 +210,12 @@ public class AccountController implements Initializable{
                     switchToHome();
                 }
                 else {
-                    avisoSenha.setText("Senha incorreta");
+                    avisoSenha.setVisible(true);
                 }
                 break;
+            }
+            else {
+                avisoUsuario.setVisible(true);
             }
         }
     }

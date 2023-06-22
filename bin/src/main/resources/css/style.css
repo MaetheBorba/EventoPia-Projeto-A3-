@@ -1,0 +1,256 @@
+* {
+    -fx-font-family: "System", "sans-serif";
+    -fx-focus-traversable: false;
+}
+
+.root {
+    -fx-background-color: #ffd404;
+}
+/*
+.scroll-pane {
+    -fx-background: hidden;
+}
+
+.scroll-bar {
+    -fx-background-color: hidden;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: black;
+    -fx-background-radius: 2em;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: rgba(0,0,0,.8);
+    -fx-background-radius: 2em;
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow,
+.scroll-bar .increment-arrow:hover,
+.scroll-bar .decrement-arrow:hover {
+    -fx-border-color: hidden;
+    -fx-background-color: hidden;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar .track {
+    -fx-background-color: hidden;
+}
+*/
+#loginPage {
+    -fx-alignment: center;
+    -fx-spacing: 1em;
+    -fx-background-color: rgba(255,255,255,0.7);
+    -fx-background-radius: 2em;
+    -fx-border-color: rgba(150,150,150,0.7);
+    -fx-border-radius: 2em;
+    -fx-border-width: 1;
+}
+
+#loginPage HBox {
+    -fx-alignment: center;
+    -fx-spacing: 5;
+}
+
+#aviso {
+    -fx-font-weight: bold;
+}
+
+#btn-login {
+    -fx-background-radius: 1em;
+    -fx-background-color: rgba(150,150,150,0.5);
+    -fx-border-radius: 1em;
+    -fx-border-width: .7;
+    -fx-border-color: rgba(150,150,150,0.7);
+    -fx-font-weight: bold;
+    -fx-font-size: 1.2em;
+    -fx-cursor: hand;
+}
+
+#h2 {
+    -fx-alignment: center;
+    -fx-text-fill: rgba(0, 0, 0, .8);
+    -fx-font-size: 2em;
+    -fx-font-weight: bold;
+}
+
+#inputBox {
+    -fx-font-family: "Consolas", "sans-serif";
+    -fx-focus-traversable: false;
+    -fx-background-color: none;
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-prompt-text-fill: black;
+}
+
+.check-box, .label {
+    -fx-font-size: 1em;
+}
+
+#btn {
+    -fx-font-weight: bold;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+#btn-home {
+    -fx-background-radius: 15px;
+    -fx-cursor: hand;
+}
+
+#optionsPane {
+    -fx-background-color: rgb(255,255,255);
+    -fx-alignment: center;
+    -fx-spacing: 0;
+    -fx-font-weight: bold;
+}
+
+#optionsPane #section {
+    -fx-alignment: top-center;
+    -fx-border-style: solid hidden hidden hidden;
+    -fx-border-color: black;
+    -fx-border-width: .1;
+}
+
+#optionsPane #section-title {
+    -fx-font-size: 15;
+    -fx-pref-width: 129;
+    -fx-alignment: center;
+    -fx-background-color: rgba(0,0,0,.05);
+}
+
+#btn-option {
+    -fx-cursor: hand;
+    -fx-fill: black;
+    -fx-background-color: none;
+    -fx-pref-width: 129;
+    -fx-pref-height: 30;
+    -fx-alignment: center-left;
+}
+
+#btn-option:hover {
+    -fx-background-color: rgba(0,0,0,.35);
+    -fx-alignment: center-left;
+}
+
+#eventList {
+    -fx-alignment: center;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-focus-traversable: false;
+}
+
+#event-item {
+    -fx-background-color: rgba(255,255,255,0.7);
+    -fx-border-color: black;
+    -fx-text-alignment: center;
+}
+
+#event-item-info-box {
+    -fx-alignment: center;
+}
+
+#event-item-info {
+    -fx-font-weight: bold;
+    -fx-font-size: 1.5em;
+}
+
+#event-item-btn {
+    -fx-cursor: hand;
+    -fx-background-color: yellow;
+}
+
+#event-item-image {
+    -fx-alignment: center-left;
+}
+
+#btn-selected {
+    -fx-font-weight: bold;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-background-color: rgba(0,0,0,.05);
+}
+
+#event {
+    -fx-alignment: center;  
+    -fx-spacing: .5em;
+    -fx-background-color: rgb(227, 189, 0);
+    -fx-font-weight: bold;
+}
+
+#event-hbox {
+    -fx-spacing: .5em;
+    -fx-alignment: center;
+}
+
+#event-data {
+    -fx-spacing: .5em;
+    -fx-font-size: 1.05em;
+    -fx-wrap-text: true;
+    -fx-alignment: center-left;
+}
+
+#event-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 2em;
+    -fx-wrap-text: true;
+}
+
+#btnParticipacao {
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-background-radius: 1em;
+}
+
+#event-descricao {
+    -fx-font-weight: bold;
+    -fx-font-size: 1.3em;
+    -fx-wrap-text: true;
+    -fx-background-radius: .5em;
+    -fx-min-width: 200;
+    -fx-alignment: center;
+}
+
+#hline {
+    -fx-background-color: black;
+    -fx-pref-height: 3;
+    -fx-max-height: 3;
+}
+
+#dataDescricao {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-wrap-text: true;
+    /*-fx-background: hidden;
+    -fx-control-inner-background: rgb(227, 189, 0);*/
+}
+
+#event-register {
+    -fx-alignment: center;
+}
+
+#event-register-data {
+    -fx-font-size: 1.05em;
+    -fx-wrap-text: true;
+}
+
+#event-register-data .text-field, .choice-box {
+    -fx-background-radius: 1em;
+}
+
+#btn-register-event {
+    -fx-font-weight: bold;
+    -fx-background-radius: 1em;
+    -fx-cursor: hand;
+}

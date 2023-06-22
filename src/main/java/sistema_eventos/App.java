@@ -21,7 +21,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("home"));
         stage.setScene(scene);
-        stage.setResizable(false);
+        //stage.setResizable(false);
         stage.setTitle("EventoPia");
         stage.getIcons().add(new Image(new File("src/main/resources/images/icon-eventopia.png").toURI().toString()));
         stage.show();

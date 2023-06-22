@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="loginPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistema_eventos.EventRegisterController">
-   <children>
-      <VBox id="optionsPane" prefHeight="400.0" prefWidth="120.0">
+
+<BorderPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistema_eventos.EventRegisterController">
+   <left>
+      <VBox id="optionsPane" BorderPane.alignment="TOP_LEFT">
          <children>
-            <Button id="btn-option" mnemonicParsing="false" onAction="#switchToHome" prefHeight="30.0" prefWidth="129.0" text="Página inicial">
+            <Button id="btn-option" mnemonicParsing="false" onAction="#switchToHome" text="Página inicial">
                <graphic>
                   <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -23,7 +27,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <VBox id="section" prefHeight="200.0" prefWidth="100.0">
+            <VBox id="section">
                <children>
                   <Label id="section-title" text="Conta" />
                   <Label fx:id="accountName" text="Visitante">
@@ -35,7 +39,7 @@
                         </ImageView>
                      </graphic>
                   </Label>
-                  <Button id="btn-option" fx:id="btnLogin" mnemonicParsing="false" onAction="#switchToAccountLogin" prefHeight="30.0" prefWidth="129.0" text="Login">
+                  <Button id="btn-option" fx:id="btnLogin" mnemonicParsing="false" onAction="#switchToAccountLogin" text="Login">
                      <graphic>
                         <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -44,7 +48,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="btn-option" fx:id="btnRegister" mnemonicParsing="false" onAction="#switchToAccountRegister" prefHeight="30.0" prefWidth="129.0" text="Registrar">
+                  <Button id="btn-option" fx:id="btnRegister" mnemonicParsing="false" onAction="#switchToAccountRegister" text="Registrar">
                      <graphic>
                         <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -53,7 +57,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="btn-option" fx:id="btnSair" mnemonicParsing="false" onAction="#logoutUsuario" prefHeight="30.0" prefWidth="129.0" text="Sair" visible="false">
+                  <Button id="btn-option" fx:id="btnSair" mnemonicParsing="false" onAction="#logoutUsuario" text="Sair" visible="false">
                      <graphic>
                         <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -64,10 +68,10 @@
                   </Button>
                </children>
             </VBox>
-            <VBox id="section" prefHeight="200.0" prefWidth="100.0">
+            <VBox id="section">
                <children>
                   <Label id="section-title" text="Seus eventos" />
-                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventRegister" prefWidth="110.0" text="Registrar">
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventRegister" text="Registrar">
                      <graphic>
                         <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -76,7 +80,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventCreated" prefHeight="30.0" prefWidth="129.0" text="Criados">
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventCreated" text="Criados">
                      <graphic>
                         <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -85,7 +89,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventParticipating" prefHeight="30.0" prefWidth="129.0" text="Participando">
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventParticipating" text="Participando">
                      <graphic>
                         <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -96,10 +100,10 @@
                   </Button>
                </children>
             </VBox>
-            <VBox id="section" prefHeight="200.0" prefWidth="100.0">
+            <VBox id="section" VBox.vgrow="ALWAYS">
                <children>
                   <Label id="section-title" text="Eventos" />
-                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventList" prefHeight="53.0" prefWidth="120.0" text="Recentes">
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventList" text="Recentes">
                      <graphic>
                         <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -108,7 +112,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventNext" prefWidth="110.0" text="Próximos">
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventNext" text="Próximos">
                      <graphic>
                         <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -117,7 +121,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventPrevious" prefWidth="110.0" text="Passados">
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventPrevious" text="Passados">
                      <graphic>
                         <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -126,7 +130,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventCategories" prefWidth="110.0" text="Categorias">
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventCategories" text="Categorias">
                      <graphic>
                         <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -139,62 +143,75 @@
             </VBox>
          </children>
       </VBox>
-      <Label fx:id="avisoCategoria" layoutX="395.0" layoutY="211.0" textFill="RED" />
-      <Label id="h2" layoutX="206.0" layoutY="68.0" text="Crie um evento" />
-      <Pane layoutX="186.0" layoutY="199.0" prefHeight="40.0" prefWidth="200.0">
+   </left>
+   <center>
+      <VBox id="event-register" fx:id="event" prefHeight="399.0" prefWidth="468.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView id="icon" fitHeight="20.0" fitWidth="20.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/tags.png" />
-               </image>
-            </ImageView>
-            <ChoiceBox fx:id="campoCategoria" layoutX="27.0" layoutY="8.0" prefHeight="22.0" prefWidth="173.0" />
+            <Label id="h2" text="Crie um evento" />
+            <HBox id="event-hbox" alignment="CENTER" prefHeight="196.0" prefWidth="464.0" VBox.vgrow="NEVER">
+               <children>
+                  <ImageView fx:id="eventImage" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icon-eventopia.png" />
+                     </image>
+                  </ImageView>
+                  <VBox id="event-register-data" prefHeight="200.0" prefWidth="280.0" HBox.hgrow="NEVER">
+                     <children>
+                        <Label text="Label" visible="false" />
+                        <TextField fx:id="campoNome" focusTraversable="false" maxWidth="325.0" promptText="Nome do evento" />
+                        <Label fx:id="avisoNome" textFill="RED" />
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                           <children>
+                              <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/marker.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="campoEndereco" focusTraversable="false" maxWidth="300.0" promptText="Endereço" HBox.hgrow="SOMETIMES" />
+                           </children>
+                        </HBox>
+                        <Label fx:id="avisoEndereco" textFill="RED" />
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                           <children>
+                              <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/calendar-clock.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="campoHorario" focusTraversable="false" promptText="31/12/2023 00:00" />
+                           </children>
+                        </HBox>
+                        <Label fx:id="avisoHorario" textFill="RED" />
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                           <children>
+                              <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/tags.png" />
+                                 </image>
+                              </ImageView>
+                              <ChoiceBox fx:id="campoCategoria" focusTraversable="false" minWidth="-Infinity" prefWidth="200.0" HBox.hgrow="SOMETIMES" />
+                           </children>
+                        </HBox>
+                        <Label fx:id="avisoCategoria" textFill="RED" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Label fx:id="avisoDescricao" textFill="RED" />
+            <HBox alignment="CENTER" prefHeight="9.0" prefWidth="482.0">
+               <children>
+                  <Pane id="hline" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <Label id="event-descricao" text="DESCRIÇÃO DO EVENTO:" />
+                  <Pane id="hline" maxHeight="3.0" minHeight="3.0" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <TextArea id="dataDescricao" fx:id="campoDescricao" focusTraversable="false" VBox.vgrow="ALWAYS" />
+            <Button id="btn-round" focusTraversable="false" mnemonicParsing="false" onAction="#cadastrarEvento" prefHeight="25.0" prefWidth="200.0" text="Registrar">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </Button>
          </children>
-      </Pane>
-      <Pane layoutX="186.0" layoutY="239.0" prefHeight="40.0" prefWidth="200.0">
-         <children>
-            <ImageView id="icon" fitHeight="20.0" fitWidth="20.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/calendar-clock.png" />
-               </image>
-            </ImageView>
-            <TextField fx:id="campoHorario" layoutX="27.0" layoutY="9.0" prefHeight="22.0" prefWidth="173.0" promptText="31/12/2023 00:00" />
-         </children>
-      </Pane>
-      <Button layoutX="186.0" layoutY="331.0" mnemonicParsing="false" onAction="#cadastrarEvento" prefHeight="25.0" prefWidth="200.0" text="Registrar" />
-      <Pane layoutX="186.0" layoutY="159.0" prefHeight="40.0" prefWidth="200.0">
-         <children>
-            <TextField id="inputBox" fx:id="campoEndereco" layoutX="27.0" layoutY="9.0" prefWidth="173.0" promptText="Endereco" />
-            <ImageView id="icon" fitHeight="20.0" fitWidth="20.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/map-marker.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-      <Pane layoutX="186.0" layoutY="119.0" prefHeight="40.0" prefWidth="200.0">
-         <children>
-            <TextField id="inputBox" fx:id="campoNome" layoutX="27.0" layoutY="9.0" prefWidth="173.0" promptText="Nome do evento" />
-            <ImageView id="icon" fitHeight="20.0" fitWidth="20.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/text.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-      <Pane layoutX="186.0" layoutY="279.0" prefHeight="40.0" prefWidth="200.0">
-         <children>
-            <TextField id="inputBox" fx:id="campoDescricao" layoutX="27.0" layoutY="9.0" prefWidth="173.0" promptText="Descricao" />
-            <ImageView id="icon" fitHeight="20.0" fitWidth="20.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/info.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-      <Label fx:id="avisoHorario" layoutX="395.0" layoutY="251.0" textFill="RED" />
-      <Label fx:id="avisoNome" layoutX="395.0" layoutY="131.0" textFill="RED" />
-      <Label fx:id="avisoEndereco" layoutX="395.0" layoutY="171.0" textFill="RED" />
-      <Label fx:id="avisoDescricao" layoutX="395.0" layoutY="291.0" textFill="RED" />
-   </children>
-</AnchorPane>
+      </VBox>
+   </center>
+</BorderPane>

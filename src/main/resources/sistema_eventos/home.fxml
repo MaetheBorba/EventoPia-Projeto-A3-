@@ -4,19 +4,15 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistema_eventos.HomeController">
-   <children>
-      <ImageView fitHeight="400.0" fitWidth="480.0" layoutX="120.0" pickOnBounds="true">
-         <image>
-            <Image url="@../images/eventopia-background.png" />
-         </image>
-      </ImageView>
-      <VBox id="optionsPane" prefHeight="400.0" prefWidth="120.0">
+<BorderPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistema_eventos.HomeController">
+   <left>
+      <VBox id="optionsPane" BorderPane.alignment="TOP_LEFT">
          <children>
-            <Button id="btn-option" mnemonicParsing="false" onAction="#switchToHome" prefHeight="30.0" prefWidth="129.0" text="Página inicial">
+            <Button id="btn-option" mnemonicParsing="false" onAction="#switchToHome" text="Página inicial">
                <graphic>
                   <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -25,7 +21,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <VBox id="section" prefHeight="200.0" prefWidth="100.0">
+            <VBox id="section">
                <children>
                   <Label id="section-title" text="Conta" />
                   <Label fx:id="accountName" text="Visitante">
@@ -66,7 +62,7 @@
                   </Button>
                </children>
             </VBox>
-            <VBox id="section" prefHeight="200.0" prefWidth="100.0">
+            <VBox id="section">
                <children>
                   <Label id="section-title" text="Seus eventos" />
                   <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventRegister" prefWidth="110.0" text="Registrar">
@@ -98,7 +94,7 @@
                   </Button>
                </children>
             </VBox>
-            <VBox id="section" prefHeight="200.0" prefWidth="100.0">
+            <VBox id="section" VBox.vgrow="ALWAYS">
                <children>
                   <Label id="section-title" text="Eventos" />
                   <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventList" prefHeight="53.0" prefWidth="120.0" text="Recentes">
@@ -141,5 +137,16 @@
             </VBox>
          </children>
       </VBox>
-   </children>
-</AnchorPane>
+   </left>
+   <center>
+      <HBox alignment="CENTER">
+         <children>
+            <ImageView pickOnBounds="true">
+               <image>
+                  <Image url="@../images/eventopia-background.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+   </center>
+</BorderPane>

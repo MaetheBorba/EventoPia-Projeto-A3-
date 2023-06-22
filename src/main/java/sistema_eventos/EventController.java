@@ -1,6 +1,7 @@
 package sistema_eventos;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
@@ -9,11 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class EventController implements Initializable{
 
@@ -32,9 +38,11 @@ public class EventController implements Initializable{
     private VBox event;
 
     @FXML
-    private Label dataCategoria;
+    private ImageView eventImage;
     @FXML
-    private Label dataDescricao;
+    private Button btnParticipacao;
+    @FXML
+    private TextArea dataDescricao;
     @FXML
     private Label dataEndereco;
     @FXML
@@ -130,6 +138,15 @@ public class EventController implements Initializable{
                 evento.addParticipante(usuarioAtual, evento.getNome());
                 statusParticipacao.setText("Sua participação neste evento está confirmada");
 
+                btnParticipacao.setText("Cancelar participação");
+                btnParticipacao.setStyle("-fx-background-color: rgba(200,0,0,.6);");
+                btnParticipacao.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        removeParticipante();
+                    }
+                });
+
                 break;
             }
         }
@@ -142,6 +159,16 @@ public class EventController implements Initializable{
                 String usuarioAtual = sessao.getUsuarioAtual();
                 evento.removeParticipante(usuarioAtual, evento.getNome());
                 statusParticipacao.setText("Sua participação neste evento não está confirmada");
+
+                btnParticipacao.setText("Confirmar participação");
+                btnParticipacao.setStyle("-fx-background-color: rgba(0,200,0,.6);");
+                btnParticipacao.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        addParticipante();
+                    }
+                });
+                
                 break;
             }
         }
@@ -172,16 +199,50 @@ public class EventController implements Initializable{
 
         for (Evento evento : eventos) {
             if (eventoSelecionado.matches(evento.getNome())) {
+                String categoria = evento.getCategoria();
+                if (categoria.matches("Acad\u00EAmico/Educativo")) {
+                    eventImage.setImage(new Image(new File("src/main/resources/images/categoria-academico.png").toURI().toString()));
+                }
+                else if (categoria.matches("Cultural/Entretenimento")) {
+                    eventImage.setImage(new Image(new File("src/main/resources/images/categoria-cultural.png").toURI().toString()));
+                }
+                else if (categoria.matches("Esportivo")) {
+                    eventImage.setImage(new Image(new File("src/main/resources/images/icon-eventopia.png").toURI().toString()));
+                }
+                else if (categoria.matches("Corporativo")) {
+                    eventImage.setImage(new Image(new File("src/main/resources/images/categoria-corporativo.png").toURI().toString()));
+                }
+                else if (categoria.matches("Religioso")) {
+                    eventImage.setImage(new Image(new File("src/main/resources/images/categoria-religioso.png").toURI().toString()));
+                }
+                else if (categoria.matches("Social")) {
+                    eventImage.setImage(new Image(new File("src/main/resources/images/categoria-social.png").toURI().toString()));
+                }
+                else {
+                    eventImage.setImage(new Image(new File("src/main/resources/images/icon-eventopia.png").toURI().toString()));
+                }
+
                 dataNome.setText(evento.getNome());
                 dataEndereco.setText(evento.getEndereco());
-                dataCategoria.setText(evento.getCategoria());
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
                 dataHorario.setText(evento.getHorario().format(formatter).toString());
                 dataDescricao.setText(evento.getDescricao());
 
                 if (evento.isParticipante(usuarioAtual, eventoSelecionado)) {
                     statusParticipacao.setText("Sua participação neste evento está confirmada");
+                    btnParticipacao.setText("Cancelar participação");
+                    btnParticipacao.setStyle("-fx-background-color: rgba(200,0,0,.6);");
+                    btnParticipacao.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            removeParticipante();
+                        }
+                    });
                 }
+                else {
+                    btnParticipacao.setStyle("-fx-background-color: rgba(0,200,0,.6);");
+                }
+                break;
             }
         }
     }

@@ -80,14 +80,14 @@ public class Evento {
         try (BufferedReader reader = new BufferedReader(new FileReader("src/main/data/events.data"))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] data = line.split(",");
+                String[] data = line.split(",,,");
                 if (data.length == 6) {
                     String nome = data[0];
                     String endereco = data[1];
                     String categoria = data[2];
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
                     LocalDateTime horario = LocalDateTime.parse(data[3], formatter);
-                    String descricao = data[4];
+                    String descricao = data[4].replace("/n", "\n");
                     String criador = data[5];
 
                     Evento evento = new Evento(nome, endereco, categoria, horario, descricao, criador);

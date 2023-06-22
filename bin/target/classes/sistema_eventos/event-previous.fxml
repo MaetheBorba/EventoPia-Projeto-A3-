@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistema_eventos.EventPreviousController">
+   <children>
+      <VBox id="optionsPane" prefHeight="400.0" prefWidth="120.0">
+         <children>
+            <Button id="btn-option" mnemonicParsing="false" onAction="#switchToHome" prefHeight="30.0" prefWidth="129.0" text="Página inicial">
+               <graphic>
+                  <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/home.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <VBox id="section" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label id="section-title" text="Conta" />
+                  <Label fx:id="accountName" text="Visitante">
+                     <graphic>
+                        <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/circle-user.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <Button id="btn-option" fx:id="btnLogin" mnemonicParsing="false" onAction="#switchToAccountLogin" prefHeight="30.0" prefWidth="129.0" text="Login">
+                     <graphic>
+                        <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/user%20(2).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="btn-option" fx:id="btnRegister" mnemonicParsing="false" onAction="#switchToAccountRegister" prefHeight="30.0" prefWidth="129.0" text="Registrar">
+                     <graphic>
+                        <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/user-add%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="btn-option" fx:id="btnSair" mnemonicParsing="false" onAction="#logoutUsuario" prefHeight="30.0" prefWidth="129.0" text="Sair" visible="false">
+                     <graphic>
+                        <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/exit.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox id="section" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label id="section-title" text="Seus eventos" />
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventRegister" prefWidth="110.0" text="Registrar">
+                     <graphic>
+                        <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/calendar-lines-pen%20(2).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventCreated" prefHeight="30.0" prefWidth="129.0" text="Criados">
+                     <graphic>
+                        <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/calendar-star%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventParticipating" prefHeight="30.0" prefWidth="129.0" text="Participando">
+                     <graphic>
+                        <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/calendar-check%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox id="section" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label id="section-title" text="Eventos" />
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventList" prefHeight="53.0" prefWidth="120.0" text="Recentes">
+                     <graphic>
+                        <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/calendar-day%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventNext" prefWidth="110.0" text="Próximos">
+                     <graphic>
+                        <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/calendar-arrow-up%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventPrevious" prefWidth="110.0" text="Passados">
+                     <graphic>
+                        <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/calendar-arrow-down%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventCategories" prefWidth="110.0" text="Categorias">
+                     <graphic>
+                        <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/calendar-lines%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <ScrollPane layoutX="120.0" prefHeight="400.0" prefWidth="481.0">
+         <content>
+            <VBox fx:id="eventList" prefHeight="399.0" prefWidth="464.0" />
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

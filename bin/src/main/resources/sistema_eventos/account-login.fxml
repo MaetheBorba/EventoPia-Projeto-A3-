@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.BoxBlur?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="loginPage-root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistema_eventos.AccountController">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="480.0" layoutX="120.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/eventopia-background.png" />
+         </image>
+         <effect>
+            <BoxBlur />
+         </effect>
+      </ImageView>
+      <VBox id="optionsPane" prefHeight="400.0" prefWidth="120.0">
+         <children>
+            <Button id="btn-option" mnemonicParsing="false" onAction="#switchToHome" prefHeight="30.0" prefWidth="129.0" text="Página inicial">
+               <graphic>
+                  <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/home.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <VBox id="section" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label id="section-title" text="Conta" />
+                  <Label fx:id="accountName" text="Visitante">
+                     <graphic>
+                        <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/circle-user.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <Button id="btn-option" fx:id="btnLogin" mnemonicParsing="false" onAction="#switchToAccountLogin" prefHeight="30.0" prefWidth="129.0" text="Login">
+                     <graphic>
+                        <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/user%20(2).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="btn-option" fx:id="btnRegister" mnemonicParsing="false" onAction="#switchToAccountRegister" prefHeight="30.0" prefWidth="129.0" text="Registrar">
+                     <graphic>
+                        <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/user-add%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="btn-option" fx:id="btnSair" mnemonicParsing="false" onAction="#logoutUsuario" prefHeight="30.0" prefWidth="129.0" text="Sair" visible="false">
+                     <graphic>
+                        <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/exit.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox id="section" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label id="section-title" text="Seus eventos" />
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventRegister" prefWidth="110.0" text="Registrar">
+                     <graphic>
+                        <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/calendar-lines-pen%20(2).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventCreated" prefHeight="30.0" prefWidth="129.0" text="Criados">
+                     <graphic>
+                        <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/calendar-star%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventParticipating" prefHeight="30.0" prefWidth="129.0" text="Participando">
+                     <graphic>
+                        <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/calendar-check%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox id="section" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label id="section-title" text="Eventos" />
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventList" prefHeight="53.0" prefWidth="120.0" text="Recentes">
+                     <graphic>
+                        <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/calendar-day%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventNext" prefWidth="110.0" text="Próximos">
+                     <graphic>
+                        <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/calendar-arrow-up%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventPrevious" prefWidth="110.0" text="Passados">
+                     <graphic>
+                        <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/calendar-arrow-down%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="btn-option" mnemonicParsing="false" onAction="#switchToEventCategories" prefWidth="110.0" text="Categorias">
+                     <graphic>
+                        <ImageView id="icon" disable="true" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/calendar-lines%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <VBox id="loginPage" layoutX="237.0" layoutY="53.0" prefHeight="294.0" prefWidth="247.0">
+         <children>
+            <ImageView fitHeight="60.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/circle-user.png" />
+               </image>
+            </ImageView>
+            <Label id="h2" text="Login" />
+            <HBox prefHeight="26.0" prefWidth="480.0">
+               <children>
+                  <ImageView id="icon" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/user.png" />
+                     </image>
+                  </ImageView>
+                  <TextField id="inputBox" fx:id="campoNome" prefHeight="25.0" prefWidth="173.0" promptText="Nome de usuário" />
+                  <Label fx:id="avisoUsuario" text="*" textFill="RED" visible="false" />
+               </children>
+            </HBox>
+            <HBox prefHeight="25.0" prefWidth="480.0">
+               <children>
+                  <ImageView id="icon" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/lock.png" />
+                     </image>
+                  </ImageView>
+                  <PasswordField id="inputBox" fx:id="campoSenha" prefHeight="25.0" prefWidth="173.0" promptText="Senha" />
+                  <Label fx:id="avisoSenha" text="*" textFill="RED" visible="false" />
+               </children>
+            </HBox>
+            <Button id="btn-login" mnemonicParsing="false" onAction="#loginUsuario" prefHeight="25.0" prefWidth="200.0" text="Login" />
+            <HBox prefHeight="9.0" prefWidth="480.0">
+               <children>
+                  <Label id="text" text="Não está registrado(a)?">
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                  </Label>
+                  <Button id="btn" mnemonicParsing="false" onAction="#switchToAccountRegister" prefHeight="25.0" prefWidth="101.0" text="Crie uma conta" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

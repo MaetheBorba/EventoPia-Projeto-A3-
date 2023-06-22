@@ -6,6 +6,8 @@ import java.util.*;
 
 import javafx.fxml.*;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -26,6 +28,11 @@ public class EventRegisterController implements Initializable {
     private Button btnSair;
 
     @FXML
+    private VBox event;
+    @FXML
+    private ImageView eventImage;
+
+    @FXML
     private TextField campoNome;
     @FXML
     private TextField campoEndereco;
@@ -34,7 +41,7 @@ public class EventRegisterController implements Initializable {
     @FXML
     private TextField campoHorario;
     @FXML
-    private TextField campoDescricao;
+    private TextArea campoDescricao;
 
     @FXML
     private Label avisoHorario;
@@ -148,7 +155,7 @@ public class EventRegisterController implements Initializable {
         try {
             LocalDateTime.parse(campoHorario.getText(), formatter);
         } catch (Exception e) {
-            avisoHorario.setText("Horário inválido.\nSiga o formato dd/MM/yyyy HH:mm");
+            avisoHorario.setText("Horário inválido. (Formato dd/MM/yyyy HH:mm)");
             dadosAceitos = false;
         }
 
@@ -179,11 +186,11 @@ public class EventRegisterController implements Initializable {
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/data/events.data"))) {
                 for (Evento evento : eventos) {
-                    String line = evento.getNome() + "," +
-                            evento.getEndereco() + "," +
-                            evento.getCategoria() + "," +
-                            evento.getHorario().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + "," +
-                            evento.getDescricao() + "," +
+                    String line = evento.getNome() + ",,," +
+                            evento.getEndereco() + ",,," +
+                            evento.getCategoria() + ",,," +
+                            evento.getHorario().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + ",,," +
+                            evento.getDescricao().replace("\n", "/n") + ",,," +
                             evento.getCriador();
                     writer.write(line);
                     writer.newLine();
