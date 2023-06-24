@@ -158,7 +158,7 @@
                <children>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/circle-user.png" />
+                        <Image url="@../images/circle-user%20(1).png" />
                      </image>
                   </ImageView>
                   <Label id="h2" text="Login" />

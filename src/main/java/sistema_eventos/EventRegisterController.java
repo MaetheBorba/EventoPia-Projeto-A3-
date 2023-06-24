@@ -12,21 +12,13 @@ import javafx.scene.layout.VBox;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class EventRegisterController implements Initializable {
+public class EventRegisterController extends Controller implements Initializable {
 
     private static List<Evento> eventos = new ArrayList<>();
     private static Evento evento;
     private String[] categorias = {"Social","Corporativo","Religioso","Acadêmico/Educativo","Cultural/Entretenimento","Esportivo"};
 
-    @FXML
-    private Label accountName;
-    @FXML
-    private Button btnLogin;
-    @FXML
-    private Button btnRegister;
-    @FXML
-    private Button btnSair;
-
+    // elementos da interface definidos no arquivo FXML
     @FXML
     private VBox event;
     @FXML
@@ -55,81 +47,7 @@ public class EventRegisterController implements Initializable {
     private Label avisoNome;
 
     
-    @FXML
-    private void switchToHome() throws IOException {
-        App.setRoot("home");
-    }
-
-    @FXML
-    private void logoutUsuario() throws IOException {
-        accountName.setText("Visitante");
-        Sessao.atualizarSessao("");
-        switchToHome();
-    }
-
-    @FXML
-    private void switchToAccountLogin() throws IOException {
-        App.setRoot("account-login");
-    }
-
-    @FXML
-    private void switchToAccountRegister() throws IOException {
-        App.setRoot("account-register");
-    }
-
-    @FXML
-    private void switchToEventRegister() throws IOException {
-        Sessao sessao = new Sessao();
-        if (sessao.getUsuarioAtual().matches("")) {
-            App.setRoot("account-login");
-        }
-        else {
-            App.setRoot("event-register");
-        }
-    }
-
-    @FXML
-    private void switchToEventParticipating() throws IOException {
-        Sessao sessao = new Sessao();
-        if (sessao.getUsuarioAtual().matches("")) {
-            App.setRoot("account-login");
-        }
-        else {
-            App.setRoot("event-participating");
-        }
-    }
-
-    @FXML
-    private void switchToEventCreated() throws IOException {
-        Sessao sessao = new Sessao();
-        if (sessao.getUsuarioAtual().matches("")) {
-            App.setRoot("account-login");
-        }
-        else {
-            App.setRoot("event-created");
-        }
-    }
-
-    @FXML
-    private void switchToEventList() throws IOException {
-        App.setRoot("event-list");
-    }
-
-    @FXML
-    private void switchToEventCategories() throws IOException {
-        App.setRoot("event-categories");
-    }
     
-    @FXML
-    private void switchToEventNext() throws IOException {
-        App.setRoot("event-next");
-    }
-
-    @FXML
-    private void switchToEventPrevious() throws IOException {
-        App.setRoot("event-previous");
-    }
-
     
 
     public void cadastrarEvento() throws IOException {
@@ -207,16 +125,13 @@ public class EventRegisterController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        
+    }
+
+    @Override
+    void loadPage() {
         // mostrar nome de usuário no menu de opções
-        Sessao sessao = new Sessao();
-        String usuarioAtual = sessao.getUsuarioAtual();
-        if (!(usuarioAtual.matches(""))) {
-            accountName.setText(usuarioAtual);
-            accountName.setVisible(true);
-            btnSair.setVisible(true);
-            btnLogin.setVisible(false);
-            btnRegister.setVisible(false);
-        }
+        displayCurrentUser();
 
         // adiciona categorias às opções do campo de categoria
         campoCategoria.setValue("Categoria");

@@ -2,11 +2,13 @@ package sistema_eventos;
 
 public class Usuario {
 
+    // variáveis para armazenar os dados do usuário
     private String nome;
     private String idade;
     private String email;
     private String senha;
 
+    // construtor
     public Usuario(String nome2, String idade2, String email2, String senha2) {
         this.nome = nome2;
         this.idade = idade2;
@@ -15,7 +17,7 @@ public class Usuario {
     }
 
     
-
+    // métodos para mudar ou receber os dados do usuário
     public String getNome() {
         return nome;
     }
@@ -47,6 +49,4 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
-    // Construtor, getters e setters
 }

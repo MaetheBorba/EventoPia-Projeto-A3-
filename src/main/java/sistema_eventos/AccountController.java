@@ -6,19 +6,12 @@ import java.util.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 
-public class AccountController implements Initializable{
+public class AccountController extends Controller implements Initializable{
 
     private static List<Usuario> usuarios = new ArrayList<>();
     private static Usuario usuario;
 
-    @FXML
-    private Label accountName;
-    @FXML
-    private Button btnLogin;
-    @FXML
-    private Button btnRegister;
-    @FXML
-    private Button btnSair;
+    // elementos da interface definidos no arquivo FXML
 
     @FXML
     private TextField campoNome;
@@ -40,83 +33,9 @@ public class AccountController implements Initializable{
     @FXML
     private Label avisoEmail;
 
-    // funções do menu de opções
-    @FXML
-    private void switchToHome() throws IOException {
-        App.setRoot("home");
-    }
-
-    @FXML
-    private void logoutUsuario() throws IOException {
-        accountName.setText("Visitante");
-        Sessao.atualizarSessao("");
-        switchToHome();
-    }
-
-    @FXML
-    private void switchToAccountLogin() throws IOException {
-        App.setRoot("account-login");
-    }
-
-    @FXML
-    private void switchToEventRegister() throws IOException {
-        Sessao sessao = new Sessao();
-        if (sessao.getUsuarioAtual().matches("")) {
-            App.setRoot("account-login");
-        }
-        else {
-            App.setRoot("event-register");
-        }
-    }
-
-    @FXML
-    private void switchToEventParticipating() throws IOException {
-        Sessao sessao = new Sessao();
-        if (sessao.getUsuarioAtual().matches("")) {
-            App.setRoot("account-login");
-        }
-        else {
-            App.setRoot("event-participating");
-        }
-    }
-
-    @FXML
-    private void switchToEventCreated() throws IOException {
-        Sessao sessao = new Sessao();
-        if (sessao.getUsuarioAtual().matches("")) {
-            App.setRoot("account-login");
-        }
-        else {
-            App.setRoot("event-created");
-        }
-    }
-
-    @FXML
-    private void switchToEventList() throws IOException {
-        App.setRoot("event-list");
-    }
-
-    @FXML
-    private void switchToAccountRegister() throws IOException {
-        App.setRoot("account-register");
-    }
-
-    @FXML
-    private void switchToEventCategories() throws IOException {
-        App.setRoot("event-categories");
-    }
     
-    @FXML
-    private void switchToEventNext() throws IOException {
-        App.setRoot("event-next");
-    }
-
-    @FXML
-    private void switchToEventPrevious() throws IOException {
-        App.setRoot("event-previous");
-    }
-    //
-
+    
+    // carrega os dados das contas ao ler o arquivo contas.data
     public static void carregarContas() {
         try (BufferedReader reader = new BufferedReader(new FileReader("src/main/data/contas.data"))) {
             String line;
@@ -137,16 +56,20 @@ public class AccountController implements Initializable{
         }
     }
 
+    // registra um novo usuário
     public void cadastrarUsuario() throws IOException {
         Boolean dadosAceitos = true;
         avisoUsuario.setVisible(false); avisoIdade.setVisible(false); avisoEmail.setVisible(false); avisoSenha.setVisible(false);
 
         // validação dos inputs
+
+        // testa se um nome foi inserido
         if (campoNome.getText().matches("")) {
             avisoUsuario.setVisible(true);
             dadosAceitos = false;
         }
 
+        // testa se a idade inserida é um número inteiro
         try {
             Integer.parseInt(campoIdade.getText());
         } catch (Exception e) {
@@ -154,16 +77,19 @@ public class AccountController implements Initializable{
             dadosAceitos = false;
         }
 
+        // testa se o email inserido é compatível com o formato (caracteres + @ + caracteres + . + 2 à 3 caracteres)
         if (!(campoEmail.getText().matches("\\w{1,}@[a-zA-Z]{1,}.\\w{2,3}"))) {
             avisoEmail.setVisible(true);
             dadosAceitos = false;
         }
 
+        // testa se uma senha foi inserida
         if (campoSenha.getText().matches("")) {
             avisoSenha.setVisible(true);
             dadosAceitos = false;
         }
 
+        // escreve os dados do usuário no arquivo contas.data se os dados foram válidados
         if (dadosAceitos) {
             carregarContas();
             String nome = campoNome.getText();
@@ -195,13 +121,15 @@ public class AccountController implements Initializable{
         }
     }
 
+    // função de login do usuário
     public void loginUsuario() throws IOException {
-        carregarContas();
+        carregarContas(); // lê o arquivo contas.data e passa os dados para um ArrayList
         String usuarioAtual="";
         avisoUsuario.setVisible(false); avisoSenha.setVisible(false);
         String nome = campoNome.getText();
         String senha = campoSenha.getText();
 
+        // se o nome de usuário estiver registrado, testa se a senha está correta
         for (Usuario usuario : usuarios) {
             if (usuario.getNome().equals(nome)) {
                 if (usuario.getSenha().equals(senha)) {
@@ -220,20 +148,15 @@ public class AccountController implements Initializable{
         }
     }
 
+    // roda quando a tela é inicializada
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        loadPage();
+    }
 
-        // mostrar nome de usuário no menu de opções
-        Sessao sessao = new Sessao();
-        String usuarioAtual = sessao.getUsuarioAtual();
-        if (!(usuarioAtual.matches(""))) {
-            accountName.setText(usuarioAtual);
-            accountName.setVisible(true);
-            btnSair.setVisible(true);
-            btnLogin.setVisible(false);
-            btnRegister.setVisible(false);
-        }
-        
+    @Override
+    void loadPage() {
+        displayCurrentUser();
     }
 }
 

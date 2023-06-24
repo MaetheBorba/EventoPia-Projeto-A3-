@@ -1,3 +1,5 @@
+/* Classe para a criação dos cards que aparecem na lista de eventos */
+
 package sistema_eventos;
 
 import java.io.BufferedWriter;
@@ -18,6 +20,7 @@ import javafx.scene.layout.VBox;
 
 public class EventListItem extends HBox{
 
+    // muda para a tela com as informações completas do evento (event.fxml)
     @FXML
     private void switchToEvent() throws IOException {
         App.setRoot("event");
@@ -26,6 +29,8 @@ public class EventListItem extends HBox{
     public EventListItem(Evento evento) {
         ImageView imagem = new ImageView();
         String categoriaStr = evento.getCategoria();
+
+        // define a imagem com base na categoria
         if (categoriaStr.matches("Acad\u00EAmico/Educativo")) {
             imagem = new ImageView(new File("src/main/resources/images/categoria-academico.png").toURI().toString());
         }
@@ -33,7 +38,7 @@ public class EventListItem extends HBox{
             imagem = new ImageView(new File("src/main/resources/images/categoria-cultural.png").toURI().toString());
         }
         else if (categoriaStr.matches("Esportivo")) {
-            imagem = new ImageView(new File("src/main/resources/images/icon-eventopia.png").toURI().toString());
+            imagem = new ImageView(new File("src/main/resources/images/categoria-esportivo.png").toURI().toString());
         }
         else if (categoriaStr.matches("Corporativo")) {
             imagem = new ImageView(new File("src/main/resources/images/categoria-corporativo.png").toURI().toString());
@@ -52,23 +57,25 @@ public class EventListItem extends HBox{
         VBox info = new VBox();
         info.setId("event-item-info-box");
 
+        // elementos que contém os dados do evento
         Label nome = new Label(evento.getNome());
         nome.setId("event-item-info");
         Label endereco = new Label("Endereço: " + evento.getEndereco());
         endereco.setId("event-item-info");
-        Label categoria = new Label("Categoria: " + evento.getCategoria());
-        categoria.setId("event-item-info");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         Label horario = new Label("Horário: " + evento.getHorario().format(formatter).toString());
         horario.setId("event-item-info");
         
+        // botão de "Ver mais"
         Button eventItemBtn = new Button("Ver mais");
         eventItemBtn.setId("btn-round");
+
+        // define a função chamada quando o botão "Ver mais" é clicado
         eventItemBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/data/temp.data"))) {
+                    try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/data/temp.data"))) { // carrega qual evento foi selecionado pela lista ao ler o arquivo temp.data
                         writer.write(evento.getNome());
                     } catch (IOException e) {
                         System.out.println(e);
@@ -80,12 +87,13 @@ public class EventListItem extends HBox{
             }
         });
 
+        // adiciona os dados do evento à parte de informações do card
         info.getChildren().addAll(nome,endereco,horario,eventItemBtn);
         info.setSpacing(5);
 
         this.setSpacing(20);
         this.setId("event-item");
-        this.getChildren().addAll(imagem, info);
+        this.getChildren().addAll(imagem, info); // adiciona a imagem e as informações ao card
         EventListItem.setHgrow(imagem, Priority.ALWAYS);
         EventListItem.setHgrow(info, Priority.ALWAYS);
     }

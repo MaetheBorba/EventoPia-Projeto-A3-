@@ -146,6 +146,10 @@
     -fx-alignment: center-left;
 }
 
+#accountName {
+    -fx-alignment: center-left;
+}
+
 #btn-option:hover {
     -fx-background-color: rgba(0,0,0,.35);
     -fx-alignment: center-left;
@@ -244,7 +248,7 @@
     -fx-background-radius: 0;
     -fx-wrap-text: true;
     -fx-background: hidden;
-    -fx-control-inner-background: #ffd404;
+    -fx-control-inner-background: #fff1a9;
 }
 
 #event-register {

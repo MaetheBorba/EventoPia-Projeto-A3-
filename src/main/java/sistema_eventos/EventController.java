@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,19 +22,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class EventController implements Initializable{
+public class EventController extends Controller implements Initializable{
 
     private static List<Evento> eventos = new ArrayList<>();
 
-    @FXML
-    private Label accountName;
-    @FXML
-    private Button btnLogin;
-    @FXML
-    private Button btnRegister;
-    @FXML
-    private Button btnSair;
-
+    // elementos da interface definidos no arquivo FXML
     @FXML
     private VBox event;
 
@@ -53,105 +46,43 @@ public class EventController implements Initializable{
     @FXML
     private Label statusParticipacao;
 
-    // funções do menu de opções
-    @FXML
-    private void switchToHome() throws IOException {
-        App.setRoot("home");
-    }
-
-    @FXML
-    private void logoutUsuario() throws IOException {
-        accountName.setText("Visitante");
-        Sessao.atualizarSessao("");
-        switchToHome();
-    }
-
-    @FXML
-    private void switchToAccountLogin() throws IOException {
-        App.setRoot("account-login");
-    }
-
-    @FXML
-    private void switchToAccountRegister() throws IOException {
-        App.setRoot("account-register");
-    }
-
-    @FXML
-    private void switchToEventRegister() throws IOException {
-        Sessao sessao = new Sessao();
-        if (sessao.getUsuarioAtual().matches("")) {
-            App.setRoot("account-login");
-        }
-        else {
-            App.setRoot("event-register");
-        }
-    }
-
-    @FXML
-    private void switchToEventParticipating() throws IOException {
-        Sessao sessao = new Sessao();
-        if (sessao.getUsuarioAtual().matches("")) {
-            App.setRoot("account-login");
-        }
-        else {
-            App.setRoot("event-participating");
-        }
-    }
-
-    @FXML
-    private void switchToEventCreated() throws IOException {
-        Sessao sessao = new Sessao();
-        if (sessao.getUsuarioAtual().matches("")) {
-            App.setRoot("account-login");
-        }
-        else {
-            App.setRoot("event-created");
-        }
-    }
-
-    @FXML
-    private void switchToEventList() throws IOException {
-        App.setRoot("event-list");
-    }
-
-    @FXML
-    private void switchToEventCategories() throws IOException {
-        App.setRoot("event-categories");
-    }
     
-    @FXML
-    private void switchToEventNext() throws IOException {
-        App.setRoot("event-next");
-    }
 
-    @FXML
-    private void switchToEventPrevious() throws IOException {
-        App.setRoot("event-previous");
-    }
-    //
-
+    // adiciona o usuário atual como participante do evento
     public void addParticipante() {
-        for (Evento evento : eventos) {
-            if (evento.getNome().matches(dataNome.getText())) {
-                Sessao sessao = new Sessao();
-                String usuarioAtual = sessao.getUsuarioAtual();
-                evento.addParticipante(usuarioAtual, evento.getNome());
-                statusParticipacao.setText("Sua participação neste evento está confirmada");
+        Sessao sessao = new Sessao();
+        String usuarioAtual = sessao.getUsuarioAtual();
 
-                btnParticipacao.setText("Cancelar participação");
-                btnParticipacao.setStyle("-fx-background-color: rgba(200,0,0,.6);");
-                btnParticipacao.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        removeParticipante();
-                    }
-                });
-
-                break;
-            }
+        // muda para a página de login se um usuário não estiver logado
+        if (usuarioAtual.matches("")) {
+            try {
+                App.setRoot("account-login");
+            } catch (IOException e) {}
         }
+
+        else {
+            for (Evento evento : eventos) {
+                if (evento.getNome().matches(dataNome.getText())) {
+                    evento.addParticipante(usuarioAtual, evento.getNome());
+                    statusParticipacao.setText("Sua participação neste evento está confirmada");
+
+                    // muda o botão de participação para cancelar
+                    btnParticipacao.setText("Cancelar participação");
+                    btnParticipacao.setStyle("-fx-background-color: rgba(200,0,0,.6);");
+                    btnParticipacao.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            removeParticipante();
+                        }
+                    });
+
+                    break;
+                }
+            }
+        } 
     }
 
+    // remove o usuário atual como participante do evento
     public void removeParticipante() {
         for (Evento evento : eventos) {
             if (evento.getNome().matches(dataNome.getText())) {
@@ -160,6 +91,7 @@ public class EventController implements Initializable{
                 evento.removeParticipante(usuarioAtual, evento.getNome());
                 statusParticipacao.setText("Sua participação neste evento não está confirmada");
 
+                // muda o botão de participação para confirmar
                 btnParticipacao.setText("Confirmar participação");
                 btnParticipacao.setStyle("-fx-background-color: rgba(0,200,0,.6);");
                 btnParticipacao.setOnAction(new EventHandler<ActionEvent>() {
@@ -174,32 +106,35 @@ public class EventController implements Initializable{
         }
     }
 
+    // roda quando a tela é inicializada
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        loadPage();
+    }
+
+    @Override
+    void loadPage() {
         String eventoSelecionado="";
         eventos = Evento.carregarEventos();
-
-        // mostrar nome de usuário no menu de opções
         Sessao sessao = new Sessao();
         String usuarioAtual = sessao.getUsuarioAtual();
-        
-        if (!(usuarioAtual.matches(""))) {
-            accountName.setText(usuarioAtual);
-            accountName.setVisible(true);
-            btnSair.setVisible(true);
-            btnLogin.setVisible(false);
-            btnRegister.setVisible(false);
-        }
 
+        // mostrar nome de usuário no menu de opções
+        displayCurrentUser();
+
+        // salva temporariamente qual evento foi selecionado da lista
         try (BufferedReader reader = new BufferedReader(new FileReader("src/main/data/temp.data"))) {
             eventoSelecionado = reader.readLine();
         } catch (IOException e) {
             System.out.println(e);
         }
 
+        // carrega as informações do evento
         for (Evento evento : eventos) {
             if (eventoSelecionado.matches(evento.getNome())) {
                 String categoria = evento.getCategoria();
+
+                // define a imagem com base na categoria
                 if (categoria.matches("Acad\u00EAmico/Educativo")) {
                     eventImage.setImage(new Image(new File("src/main/resources/images/categoria-academico.png").toURI().toString()));
                 }
@@ -222,25 +157,33 @@ public class EventController implements Initializable{
                     eventImage.setImage(new Image(new File("src/main/resources/images/icon-eventopia.png").toURI().toString()));
                 }
 
+                // passa os dados do evento para os elementos da tela
                 dataNome.setText(evento.getNome());
                 dataEndereco.setText(evento.getEndereco());
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
                 dataHorario.setText(evento.getHorario().format(formatter).toString());
                 dataDescricao.setText(evento.getDescricao());
 
-                if (evento.isParticipante(usuarioAtual, eventoSelecionado)) {
-                    statusParticipacao.setText("Sua participação neste evento está confirmada");
-                    btnParticipacao.setText("Cancelar participação");
-                    btnParticipacao.setStyle("-fx-background-color: rgba(200,0,0,.6);");
-                    btnParticipacao.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            removeParticipante();
-                        }
-                    });
+                if (evento.getHorario().isAfter(LocalDateTime.now())) {
+                    // muda o botão de participação com base no status de participação do usuário
+                    if (evento.isParticipante(usuarioAtual, eventoSelecionado)) {
+                        statusParticipacao.setText("Sua participação neste evento está confirmada");
+                        btnParticipacao.setText("Cancelar participação");
+                        btnParticipacao.setStyle("-fx-background-color: rgba(200,0,0,.6);");
+                        btnParticipacao.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                removeParticipante();
+                            }
+                        });
+                    }
+                    else {
+                        btnParticipacao.setStyle("-fx-background-color: rgba(0,200,0,.6);");
+                    }
                 }
                 else {
-                    btnParticipacao.setStyle("-fx-background-color: rgba(0,200,0,.6);");
+                    btnParticipacao.setVisible(false);
+                    statusParticipacao.setText("Este evento já passou :(");
                 }
                 break;
             }
